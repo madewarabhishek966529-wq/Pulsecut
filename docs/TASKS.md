@@ -5,8 +5,10 @@ Do one at a time. Tick when it works in the browser.
 - [x] Repo, docs, scaffold
 
 ## Phase 1: Design
-- [ ] Generate screens in Stitch/v0 (see PROMPTS.md): Dashboard, Editor, Effects panel, Prompt-to-Filter modal, Export dialog
-- [ ] Save exports to `/design`, define theme tokens in `index.css`
+- [x] Design system written (`design/DESIGN.md`) and Stitch prompts ready (`design/stitch/`)
+- [ ] Generate screens in Stitch in order: Editor, Dashboard, Prompt-to-Filter, Export, Landing (see `design/stitch/README.md`)
+- [ ] Save Stitch exports to `/design/exports/`
+- [x] Theme tokens defined in `client/src/index.css`
 
 ## Phase 2: Core editor
 - [ ] T1: Upload a video, show it on a PixiJS canvas, play/pause

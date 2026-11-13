@@ -3,13 +3,75 @@
 @theme {
   --color-bg: #07070b;
   --color-panel: #0f0f16;
+  --color-panel-2: #151520;
   --color-border: #22222e;
   --color-text: #e8e8f0;
   --color-muted: #8a8aa0;
   --color-pulse: #22d3ee;
   --color-pulse-2: #8b5cf6;
+  --color-success: #34d399;
+  --color-danger: #f87171;
+  --color-track-video: #22d3ee;
+  --color-track-audio: #34d399;
+  --color-track-text: #f59e0b;
+  --color-track-effect: #8b5cf6;
+
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-pulse-glow: pulse-glow 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.02); opacity: 1; }
+}
+
+:root {
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+  --gradient-pulse: linear-gradient(135deg, #22d3ee, #8b5cf6);
 }
 
 html, body, #root { height: 100%; }
-body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); margin: 0; }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass {
+  background: rgba(15, 15, 22, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+}
+
+.btn-primary {
+  background: var(--gradient-pulse);
+  color: #07070b;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: transform var(--dur-fast) var(--ease-out-soft);
+}
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0) scale(0.98); }
+
+.skeleton {
+  background: linear-gradient(90deg, #151520 25%, #1d1d2b 50%, #151520 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
