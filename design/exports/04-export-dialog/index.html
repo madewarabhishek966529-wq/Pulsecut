@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary":"#3c0091","on-background":"#e4e1e9","outline-variant":"#3c494c","surface-container":"#1f1f25","error":"#ffb4ab","on-primary-fixed-variant":"#004e5a","surface-variant":"#35343a","on-primary-fixed":"#001f25","inverse-on-surface":"#303036","error-container":"#93000a","primary":"#8aebff","surface-container-highest":"#35343a","tertiary-container":"#ffa7c9","primary-fixed-dim":"#2fd9f4","surface-dim":"#131318","primary-container":"#22d3ee","on-secondary-container":"#c4abff","on-error-container":"#ffdad6","on-error":"#690005","on-tertiary-fixed":"#3e0022","on-secondary-fixed":"#23005c","tertiary-fixed-dim":"#ffb0cd","surface-container-lowest":"#0e0e13","outline":"#859397","surface":"#131318","on-primary-container":"#005763","on-secondary-fixed-variant":"#5516be","surface-bright":"#39383e","on-tertiary":"#640039","secondary-fixed":"#e9ddff","secondary-fixed-dim":"#d0bcff","secondary-container":"#571bc1","surface-container-low":"#1b1b20","inverse-primary":"#006877","background":"#131318","secondary":"#d0bcff","on-surface-variant":"#bbc9cd","inverse-surface":"#e4e1e9","tertiary-fixed":"#ffd9e4","primary-fixed":"#a2eeff","on-tertiary-container":"#9b005c","on-surface":"#e4e1e9","surface-container-high":"#2a292f","on-tertiary-fixed-variant":"#8c0053","surface-tint":"#2fd9f4","tertiary":"#ffd0e0","on-primary":"#00363e"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","space-lg":"1rem","gutter-desktop":"1rem","margin-desktop":"1.25rem","space-md":"0.75rem",gutter:"0.75rem",margin:"0.75rem","space-sm":"0.5rem","space-xl":"1.5rem"},fontFamily:{"label-mono-md":["JetBrains Mono"],"label-mono-lg":["JetBrains Mono"],"body-md":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"display-lg":["Inter"],"label-mono-sm":["JetBrains Mono"]},fontSize:{"label-mono-md":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}],"label-mono-lg":["1rem",{lineHeight:"1.25rem",letterSpacing:"-0.02em",fontWeight:"600"}],"body-md":["0.875rem",{lineHeight:"1.375rem",fontWeight:"400"}],"body-sm":["0.75rem",{lineHeight:"1.125rem",fontWeight:"400"}],"headline-md":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-sm":["1.125rem",{lineHeight:"1.5rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.025em",fontWeight:"700"}],"label-mono-sm":["0.6875rem",{lineHeight:"0.875rem",letterSpacing:"0.04em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 h-12 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-white/[0.08]"><div class="w-full h-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Pulsecut Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCLvHwa4vDy1JiPhz4qrmwf_grfrD3b4NSzI4UiDOtgk9hwF9CwjgVyqBNYN2Mtto4XOF4bjDFOMyokZWsmwhPLHrcoy7mEeVn0xTOOEX3lwcycaTPKW2-wU2J0-q2t2hFeUNBEoNw0BO4q6hsC94CXYoKer7ePANqM2K877wtccRY2OLv8MsRzR1L-iJE0hQCX70BfIjbqXYUuS3eFWB8nW4YYBSyeps_5Q3UQZt-T"/><span class="font-headline-sm text-headline-sm font-bold tracking-tight bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.45)]">PULSECUT</span></div><div class="h-4 w-px bg-outline-variant/40 hidden sm:block"></div><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-bold"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="editor" href="#">Editor</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-filters" href="#">AI Filters</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="export" href="#">Export</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="landing-preview" href="#">Landing Preview</a></nav></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded bg-surface-container-low/80 border border-white/[0.06]"><span class="material-symbols-outlined text-[16px] text-primary">movie_filter</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface font-medium truncate max-w-[200px]">Cyber_Beat_Drop_v2.mp4</span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span><span class="font-label-mono-sm text-label-mono-sm text-outline">Saved</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-on-surface-variant"><button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high hover:text-on-surface transition-all" title="Undo (Ctrl+Z)" type="button"><span class="material-symbols-outlined text-[18px]">undo</span></button><button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high hover:text-on-surface transition-all" title="Redo (Ctrl+Y)" type="button"><span class="material-symbols-outlined text-[18px]">redo</span></button></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-white/[0.06]" title="Cloud Sync Active"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant hidden md:inline">Synced</span></div><span class="px-space-sm py-0.5 rounded font-label-mono-sm text-label-mono-sm font-semibold tracking-wider uppercase bg-secondary-container text-on-secondary-container shadow-[0_0_12px_rgba(87,27,193,0.4)]">PRO</span><div class="p-[1.5px] rounded-full bg-gradient-to-tr from-primary via-primary-container to-secondary shadow-[0_0_10px_rgba(34,211,238,0.3)] cursor-pointer"><img alt="Profile" class="w-7 h-7 rounded-full object-cover block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuDU3sw0RYvW8Uk-MNFvHO76kLiamk7YdfGfbjAT-axHGItDLADTi23RxbhggmbQ3SPfAvHKOpDZa6NYwDUR3jp1iwUe69QX72ZV2rn202jJb8l48LN64aaqYUGz9Yq7OF_kj8YItOiHyHUnG941o-FewDrBvWAU2h1d0wrElZjMnLstpFz1lM03Rm686tGBSmXkwbrKeLVHaF9m7FSjYpY6AGThaSkJGzy52UzseM"/></div></div></div></header><aside class="fixed left-0 top-12 bottom-0 w-16 bg-surface-container-low/80 backdrop-blur-xl border-r border-white/[0.08] z-40 flex flex-col justify-between items-center py-space-md"><div class="flex flex-col gap-space-sm w-full px-space-xs"><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary hover:bg-surface-container-high transition-colors" title="Media Bin" type="button"><span class="material-symbols-outlined text-[20px]">perm_media</span><span class="font-label-mono-sm text-[9px] mt-0.5">Media</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="AI Beat Detection" type="button"><span class="material-symbols-outlined text-[20px]">graphic_eq</span><span class="font-label-mono-sm text-[9px] mt-0.5">Beats</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Video Effects" type="button"><span class="material-symbols-outlined text-[20px]">auto_awesome</span><span class="font-label-mono-sm text-[9px] mt-0.5">FX</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Audio Transitions" type="button"><span class="material-symbols-outlined text-[20px]">equalizer</span><span class="font-label-mono-sm text-[9px] mt-0.5">Audio</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Color Grading" type="button"><span class="material-symbols-outlined text-[20px]">palette</span><span class="font-label-mono-sm text-[9px] mt-0.5">Color</span></button></div><div class="flex flex-col gap-space-sm w-full px-space-xs"><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Keyboard Shortcuts" type="button"><span class="material-symbols-outlined text-[18px]">keyboard</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Platform Settings" type="button"><span class="material-symbols-outlined text-[18px]">tune</span></button></div></aside><div class="pl-16"><main class="relative w-full pt-12 min-h-screen bg-surface-container-lowest"><div class="flex flex-col w-full relative min-h-[calc(100vh-3rem)] p-space-md lg:p-space-xl items-center justify-center overflow-x-hidden">
+<!-- Backdrop Studio Environment (Mock NLE Workbench Blurred in Background) -->
+<div class="absolute inset-0 pointer-events-none opacity-20 select-none overflow-hidden flex flex-col justify-between">
+<div class="w-full h-1/2 flex gap-space-md p-space-md">
+<div class="w-1/4 rounded-xl bg-surface-container-high h-full"></div>
+<div class="w-3/4 rounded-xl bg-surface-container-high h-full relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-secondary-container/20 to-primary-container/10"></div>
+</div>
+</div>
+<div class="w-full h-1/3 bg-surface-container-high mx-space-md rounded-xl p-space-md flex flex-col justify-end gap-space-xs">
+<div class="h-6 w-full rounded bg-surface-container"></div>
+<div class="h-10 w-full rounded bg-surface-container-highest"></div>
+<div class="h-10 w-full rounded bg-surface-container"></div>
+</div>
+</div>
+<!-- Ambient Radiant Halo behind Modal -->
+<div class="absolute w-[680px] h-[520px] bg-gradient-to-tr from-primary-container/25 via-secondary-container/25 to-tertiary-container/10 blur-[130px] rounded-full pointer-events-none -z-0"></div>
+<!-- Main Export Modal Dialog Container -->
+<div class="relative z-10 w-full max-w-[820px] bg-surface-container-lowest/95 backdrop-blur-2xl rounded-xl shadow-2xl p-space-lg flex flex-col gap-space-lg overflow-hidden">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">movie_filter</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Export Project</h2>
+<span class="px-space-xs py-0.5 rounded font-label-mono-sm text-label-mono-sm uppercase font-semibold bg-primary-container text-on-primary-container">PRO GPU V2</span>
+</div>
+<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            Cyber_Beat_Drop_v2.mp4
+            <span class="text-outline-variant">•</span>
+            Master Timeline Sequence
+          </p>
+</div>
+</div>
+<button aria-label="Close export dialog" class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-all cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Modal Body: Two Column Precision Studio Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Export Settings (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Format Selector -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-on-surface-variant tracking-wider flex items-center justify-between">
+<span>Encoding Format</span>
+<span class="text-primary font-normal">H.264 / AAC Standard</span>
+</label>
+<div class="grid grid-cols-2 gap-space-xs" id="format-options">
+<!-- Format Card 1 (Active) -->
+<button class="group flex flex-col text-left p-space-sm rounded-lg bg-surface-container-high transition-all text-on-surface shadow-sm cursor-pointer" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="font-label-mono-md text-label-mono-md font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span> MP4
+                </span>
+<span class="w-2 h-2 rounded-full bg-primary shadow-sm"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">H.264 / AAC (Recommended)</span>
+</button>
+<!-- Format Card 2 -->
+<button class="group flex flex-col text-left p-space-sm rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="font-label-mono-md text-label-mono-md font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">language</span> WebM
+                </span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">VP9 / Opus Compression</span>
+</button>
+<!-- Format Card 3 -->
+<button class="group flex flex-col text-left p-space-sm rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="font-label-mono-md text-label-mono-md font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">stream</span> ProRes
+                </span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">422 Master Quality (HQ)</span>
+</button>
+<!-- Format Card 4 -->
+<button class="group flex flex-col text-left p-space-sm rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all cursor-pointer" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="font-label-mono-md text-label-mono-md font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">gif</span> GIF
+                </span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Animated Looping Sequence</span>
+</button>
+</div>
+</div>
+<!-- Resolution Selector -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-on-surface-variant tracking-wider">Target Resolution</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">Canvas: 16:9 Landscape</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs p-1 rounded-lg bg-surface-container">
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" type="button">
+              720p HD
+            </button>
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md bg-surface-container-highest text-primary font-bold shadow-sm transition-all cursor-pointer" type="button">
+              1080p FHD
+            </button>
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" type="button">
+              4K UHD
+            </button>
+</div>
+</div>
+<!-- Frame Rate (FPS) Selector -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-on-surface-variant tracking-wider">Framerate (FPS)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Beat-Locked Motion</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs p-1 rounded-lg bg-surface-container">
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" type="button">
+              24 Cinematic
+            </button>
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md text-on-surface-variant hover:text-on-surface transition-all cursor-pointer" type="button">
+              30 Standard
+            </button>
+<button class="py-1.5 px-space-xs rounded text-center font-label-mono-md text-label-mono-md bg-surface-container-highest text-primary font-bold shadow-sm transition-all cursor-pointer" type="button">
+              60 Smooth
+            </button>
+</div>
+</div>
+<!-- Bitrate Slider & Hardware Acceleration -->
+<div class="p-space-sm rounded-lg bg-surface-container flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">speed</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface">Target Bitrate: High</span>
+</div>
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">32 Mbps</span>
+</div>
+<!-- Interactive Slider Track -->
+<div class="relative w-full h-2 rounded-full bg-surface-container-highest flex items-center">
+<div class="h-full w-2/3 rounded-full bg-gradient-to-r from-primary via-primary-container to-secondary"></div>
+<div class="absolute left-2/3 -translate-x-1/2 w-4 h-4 rounded-full bg-on-background shadow-md cursor-pointer hover:scale-110 transition-transform"></div>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>8 Mbps (Web)</span>
+<span>24 Mbps</span>
+<span>50 Mbps (Max)</span>
+</div>
+<!-- Codec Acceleration Badge Toggle -->
+<div class="pt-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">memory</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Hardware Codec Acceleration</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Active: NVENC / Apple Metal v3</span>
+</div>
+</div>
+<div class="w-10 h-5 rounded-full bg-secondary-container p-0.5 flex items-center justify-end cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-primary shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Audio Configuration & Stem Markers -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-on-surface-variant tracking-wider">Audio Mastering Engine</span>
+<div class="grid grid-cols-2 gap-space-xs">
+<div class="p-space-xs px-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Sample Rate</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold">48.0 kHz</span>
+</div>
+<div class="p-space-xs px-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Audio Stream</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold">320 kbps AAC</span>
+</div>
+</div>
+<label class="flex items-center gap-space-xs p-space-xs rounded bg-surface-container/50 cursor-pointer hover:bg-surface-container">
+<input checked="" class="accent-primary rounded w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface select-none">Embed Synced AI Beat Markers as Chapter Metadata</span>
+</label>
+</div>
+</div>
+<!-- RIGHT COLUMN: Video Summary & Live Rendering Status (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Live Visual Preview Frame with Resolution Badge -->
+<div class="relative w-full aspect-video rounded-xl bg-surface-container-high overflow-hidden shadow-lg group">
+<img class="w-full h-full object-cover" data-alt="Cyberpunk high energy electronic music video editing stage with vivid neon cyan and magenta stage lighting, laser beams, futuristic audio visualizer HUD graphics, 4k cinematic frame capture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb1_CepOi0V5DvC1KSiNa2L-SmFF84OCifm5zc4ehtTKNmGtxfFbXedFUJnwuKArJSXsam6sx4fy8DRuYe50-5S5p0p_skti4e9DTBFe9cNk9Wu9mOsqTTe5uBmObQ7U3cr-6V7YORz5ifSdOZoGUxXRWk9yx5vlNxuaMO5dj3fVLXVslNnv7Yzpb-sRqF1J_N93grHBI27qre2JUiT8wn9U6IORZg7r4QnbAU-lNk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-transparent to-black/30 pointer-events-none"></div>
+<!-- Overlaid Playhead & Beat Overlay Indicator -->
+<div class="absolute top-space-xs left-space-xs px-space-xs py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">graphic_eq</span>
+            1920x1080 • 60fps
+          </div>
+<div class="absolute top-space-xs right-space-xs px-space-xs py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-secondary font-semibold">
+            128 BPM
+          </div>
+<div class="absolute bottom-space-xs left-space-xs right-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface">
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+              Live Buffer Frame
+            </span>
+<span class="text-outline">00:02:14:18 / 00:02:45:00</span>
+</div>
+</div>
+<!-- Render Specifications Metadata Grid -->
+<div class="grid grid-cols-2 gap-space-xs p-space-sm rounded-xl bg-surface-container">
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Est. File Size</span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">248.6 MB</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Total Duration</span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">00:02:45</span>
+</div>
+<div class="flex flex-col pt-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Frame Count</span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">9,900 frames</span>
+</div>
+<div class="flex flex-col pt-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Audio Config</span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">Stereo 48kHz</span>
+</div>
+</div>
+<!-- Live Render Progress Section -->
+<div class="flex flex-col gap-space-xs p-space-sm rounded-xl bg-surface-container-high shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] animate-spin">sync</span>
+              Pass 2 of 2: Synced Beat FX
+            </span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-primary">78%</span>
+</div>
+<!-- Dynamic Glowing Progress Bar -->
+<div class="w-full h-3 rounded-full bg-surface-container-lowest overflow-hidden p-0.5 relative">
+<div class="h-full rounded-full bg-gradient-to-r from-primary via-primary-container to-secondary relative flex items-center justify-end" style="width: 78%;">
+<div class="w-1.5 h-1.5 rounded-full bg-on-background mr-0.5 animate-pulse"></div>
+</div>
+</div>
+<!-- Progress Metrics Details -->
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-outline-variant pt-0.5">
+<span class="text-on-surface-variant">Time remaining: <strong class="text-on-surface">00:18</strong></span>
+<span>46.8 fps • 7,722 / 9,900</span>
+</div>
+</div>
+<!-- Ready / Success Banner & Instant Actions -->
+<div class="flex flex-col gap-space-xs p-space-sm rounded-xl bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">verified</span>
+<span class="font-label-mono-sm text-label-mono-sm font-bold text-on-surface">Render Pipeline Synchronized</span>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-col gap-space-xs mt-space-xs">
+<button class="w-full py-2 px-space-md rounded-lg font-headline-sm text-headline-sm font-bold text-on-primary-fixed bg-gradient-to-r from-primary via-primary-container to-secondary hover:opacity-95 shadow-md flex items-center justify-center gap-space-xs cursor-pointer transition-all active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+              Download Video (.mp4)
+            </button>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="py-1.5 px-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">share</span>
+                TikTok / Shorts
+              </button>
+<button class="py-1.5 px-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">link</span>
+                Direct Link
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer Controls -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer self-start sm:self-auto">
+<input checked="" class="accent-primary rounded w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant select-none">Send push notification &amp; sync to cloud media bin</span>
+</label>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="py-1.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-headline-sm text-headline-sm transition-all cursor-pointer" type="button">
+          Cancel Export
+        </button>
+<button class="py-1.5 px-space-lg rounded-lg bg-primary text-on-primary font-headline-sm text-headline-sm font-semibold hover:bg-primary-container transition-all shadow-md cursor-pointer" type="button">
+          Done
+        </button>
+</div>
+</div>
+</div>
+<script>
+    // Visual tab switcher micro-interaction for Format cards
+    document.querySelectorAll('#format-options button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#format-options button').forEach((b) => {
+          b.classList.remove('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+          const indicator = b.querySelector('.rounded-full');
+          if (indicator) {
+            indicator.classList.remove('bg-primary');
+            indicator.classList.add('bg-outline-variant');
+          }
+        });
+        btn.classList.add('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        const activeIndicator = btn.querySelector('.rounded-full');
+        if (activeIndicator) {
+          activeIndicator.classList.add('bg-primary');
+          activeIndicator.classList.remove('bg-outline-variant');
+        }
+      });
+    });
+  </script>
+</div></main></div></body></html>

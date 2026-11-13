@@ -6,8 +6,8 @@ Do one at a time. Tick when it works in the browser.
 
 ## Phase 1: Design
 - [x] Design system written (`design/DESIGN.md`) and Stitch prompts ready (`design/stitch/`)
-- [ ] Generate screens in Stitch in order: Editor, Dashboard, Prompt-to-Filter, Export, Landing (see `design/stitch/README.md`)
-- [ ] Save Stitch exports to `/design/exports/`
+- [x] Generate screens in Stitch in order: Editor, Dashboard, Prompt-to-Filter, Export, Landing (see `design/stitch/README.md`)
+- [x] Save Stitch exports to `/design/exports/`
 - [x] Theme tokens defined in `client/src/index.css`
 
 ## Phase 2: Core editor

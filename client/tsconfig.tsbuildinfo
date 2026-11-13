@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/effects/registry.ts","./src/lib/api.ts","./src/store/timelinestore.ts","./src/types/effects.ts","./src/types/timeline.ts","./vite.config.ts"],"version":"5.9.3"}

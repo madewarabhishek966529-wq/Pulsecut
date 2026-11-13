@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary":"#3c0091","on-background":"#e4e1e9","outline-variant":"#3c494c","surface-container":"#1f1f25","error":"#ffb4ab","on-primary-fixed-variant":"#004e5a","surface-variant":"#35343a","on-primary-fixed":"#001f25","inverse-on-surface":"#303036","error-container":"#93000a","primary":"#8aebff","surface-container-highest":"#35343a","tertiary-container":"#ffa7c9","primary-fixed-dim":"#2fd9f4","surface-dim":"#131318","primary-container":"#22d3ee","on-secondary-container":"#c4abff","on-error-container":"#ffdad6","on-error":"#690005","on-tertiary-fixed":"#3e0022","on-secondary-fixed":"#23005c","tertiary-fixed-dim":"#ffb0cd","surface-container-lowest":"#0e0e13","outline":"#859397","surface":"#131318","on-primary-container":"#005763","on-secondary-fixed-variant":"#5516be","surface-bright":"#39383e","on-tertiary":"#640039","secondary-fixed":"#e9ddff","secondary-fixed-dim":"#d0bcff","secondary-container":"#571bc1","surface-container-low":"#1b1b20","inverse-primary":"#006877","background":"#131318","secondary":"#d0bcff","on-surface-variant":"#bbc9cd","inverse-surface":"#e4e1e9","tertiary-fixed":"#ffd9e4","primary-fixed":"#a2eeff","on-tertiary-container":"#9b005c","on-surface":"#e4e1e9","surface-container-high":"#2a292f","on-tertiary-fixed-variant":"#8c0053","surface-tint":"#2fd9f4","tertiary":"#ffd0e0","on-primary":"#00363e"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","space-lg":"1rem","gutter-desktop":"1rem","margin-desktop":"1.25rem","space-md":"0.75rem",gutter:"0.75rem",margin:"0.75rem","space-sm":"0.5rem","space-xl":"1.5rem"},fontFamily:{"label-mono-md":["JetBrains Mono"],"label-mono-lg":["JetBrains Mono"],"body-md":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"display-lg":["Inter"],"label-mono-sm":["JetBrains Mono"]},fontSize:{"label-mono-md":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}],"label-mono-lg":["1rem",{lineHeight:"1.25rem",letterSpacing:"-0.02em",fontWeight:"600"}],"body-md":["0.875rem",{lineHeight:"1.375rem",fontWeight:"400"}],"body-sm":["0.75rem",{lineHeight:"1.125rem",fontWeight:"400"}],"headline-md":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-sm":["1.125rem",{lineHeight:"1.5rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.025em",fontWeight:"700"}],"label-mono-sm":["0.6875rem",{lineHeight:"0.875rem",letterSpacing:"0.04em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container flex flex-col min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 h-16 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-white/[0.08]"><div class="w-full max-w-7xl mx-auto px-6 h-full flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Pulsecut Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCLvHwa4vDy1JiPhz4qrmwf_grfrD3b4NSzI4UiDOtgk9hwF9CwjgVyqBNYN2Mtto4XOF4bjDFOMyokZWsmwhPLHrcoy7mEeVn0xTOOEX3lwcycaTPKW2-wU2J0-q2t2hFeUNBEoNw0BO4q6hsC94CXYoKer7ePANqM2K877wtccRY2OLv8MsRzR1L-iJE0hQCX70BfIjbqXYUuS3eFWB8nW4YYBSyeps_5Q3UQZt-T"/><span class="font-headline-sm text-headline-sm font-bold tracking-tight bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.45)]">PULSECUT</span></div><nav class="hidden md:flex items-center gap-space-lg ml-space-lg" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary font-bold" data-path="landing-preview" href="#">Landing Preview</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="editor" href="#">Editor</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-filters" href="#">AI Filters</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="export" href="#">Export</a></nav></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-white/[0.06]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Ready</span></div><span class="px-space-sm py-0.5 rounded font-label-mono-sm text-label-mono-sm font-semibold tracking-wider uppercase bg-secondary-container text-on-secondary-container shadow-[0_0_12px_rgba(87,27,193,0.4)]">PRO</span><div class="p-[1.5px] rounded-full bg-gradient-to-tr from-primary via-primary-container to-secondary shadow-[0_0_10px_rgba(34,211,238,0.3)] cursor-pointer"><img alt="Profile" class="w-8 h-8 rounded-full object-cover block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuDU3sw0RYvW8Uk-MNFvHO76kLiamk7YdfGfbjAT-axHGItDLADTi23RxbhggmbQ3SPfAvHKOpDZa6NYwDUR3jp1iwUe69QX72ZV2rn202jJb8l48LN64aaqYUGz9Yq7OF_kj8YItOiHyHUnG941o-FewDrBvWAU2h1d0wrElZjMnLstpFz1lM03Rm686tGBSmXkwbrKeLVHaF9m7FSjYpY6AGThaSkJGzy52UzseM"/></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface-container-lowest"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden px-4 md:px-8 pt-10 pb-20 flex flex-col items-center justify-center">
+<!-- Ambient Glow Orbs -->
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-primary-container/20 via-secondary-container/25 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute top-1/3 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Announcement Pill -->
+<div class="relative z-10 mb-8 inline-flex items-center gap-space-sm px-4 py-1.5 rounded-full bg-surface-container-high/80 backdrop-blur-xl shadow-lg hover:bg-surface-variant transition-all cursor-pointer group">
+<span class="font-body-sm text-body-sm text-primary font-medium tracking-wide">✨ Introducing Pulsecut 2.0 with Realtime Prompt-to-Filter AI</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform text-sm">arrow_forward</span>
+</div>
+<!-- Radiant Waveform SVG Behind Headline -->
+<div class="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-35 pointer-events-none">
+<svg class="w-full h-auto text-primary" fill="none" viewbox="0 0 900 160">
+<path class="animate-pulse" d="M0 80 Q 75 10, 150 80 T 300 80 T 450 140 T 600 20 T 750 80 T 900 80" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0 80 Q 100 130, 200 80 T 400 30 T 600 130 T 800 50 T 900 80" opacity="0.75" stroke="url(#hero-wave-grad)" stroke-dasharray="4 6" stroke-width="1.5"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="hero-wave-grad" x1="0" x2="900" y1="0" y2="0">
+<stop stop-color="#22D3EE"></stop>
+<stop offset="0.5" stop-color="#8B5CF6"></stop>
+<stop offset="1" stop-color="#EC4899"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<!-- Main Headline & Subtitle -->
+<div class="relative z-10 max-w-4xl text-center flex flex-col items-center">
+<h1 class="font-display-lg text-display-lg md:text-5xl lg:text-6xl font-bold tracking-tight text-on-surface leading-tight">
+        Edit at the <span class="bg-gradient-to-r from-primary-container via-primary to-secondary bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(34,211,238,0.45)]">speed of the beat</span>
+</h1>
+<p class="mt-6 max-w-2xl font-body-md text-body-md md:text-base text-on-surface-variant leading-relaxed">
+        Turn raw footage and trending audio into viral, beat-synced masterpieces in seconds. Let generative AI build custom reactive filters while you stay in the flow.
+      </p>
+<!-- Action CTA Buttons -->
+<div class="mt-8 flex flex-wrap items-center justify-center gap-space-md">
+<a class="px-6 py-3 rounded-lg font-headline-sm text-headline-sm font-semibold text-on-primary bg-gradient-to-r from-primary-container to-secondary-container hover:brightness-110 shadow-[0_0_24px_rgba(34,211,238,0.45)] transition-all flex items-center gap-2 group" href="#">
+<span>Start Editing Free</span>
+<span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">bolt</span>
+</a>
+<button class="px-5 py-3 rounded-lg font-body-md text-body-md font-medium text-on-surface bg-surface-container/70 backdrop-blur-xl hover:bg-surface-variant shadow-md flex items-center gap-2 transition-all" id="open-demo-modal">
+<span class="material-symbols-outlined text-primary fill-1" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span>Watch 60s Demo</span>
+</button>
+</div>
+<!-- Social Proof Strip -->
+<div class="mt-8 flex flex-wrap items-center justify-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center text-primary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-semibold text-on-surface">5.0 / 5.0</span>
+<span class="text-outline">•</span>
+<span>Trusted by <span class="text-on-surface font-semibold">450,000+</span> creators on TikTok, Reels &amp; YouTube</span>
+</div>
+</div>
+<!-- HERO PRODUCT SHOWCASE MOCKUP -->
+<div class="relative z-10 mt-14 w-full max-w-5xl rounded-2xl bg-surface-container-low/90 backdrop-blur-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(34,211,238,0.15)] overflow-hidden">
+<!-- Glow Underlay Canvas -->
+<div class="absolute -top-16 left-1/4 w-96 h-48 bg-primary/20 blur-3xl pointer-events-none"></div>
+<!-- Studio Mockup Titlebar -->
+<div class="h-11 bg-surface-container px-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error/80"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-container/80"></span>
+<span class="w-3 h-3 rounded-full bg-primary/80"></span>
+<span class="ml-3 font-label-mono-sm text-label-mono-sm text-on-surface-variant">project_tokyo_drift_beatcut_4k.pulse</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded font-label-mono-sm text-label-mono-sm bg-surface-container-high text-primary">128.0 BPM</span>
+<span class="px-2 py-0.5 rounded font-label-mono-sm text-label-mono-sm bg-secondary-container text-on-secondary-container">GPU 60FPS</span>
+</div>
+</div>
+<!-- Studio Inner Layout: Viewer & Timeline -->
+<div class="p-4 flex flex-col gap-4">
+<!-- Top Half: Preview Stage & Inspector Mini Panel -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Live Preview Canvas -->
+<div class="md:col-span-8 relative aspect-video rounded-xl bg-surface-container-lowest overflow-hidden flex items-center justify-center group shadow-inner">
+<img class="w-full h-full object-cover" data-alt="High energy cyberpunk music video frame with neon cyan and violet city reflections, rain slicks on asphalt, dynamic motion blur and optical beat flash effect in cinematic 4k resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhVWy1UjydAGuJrorDNBFDqfmdvyXpPzaKy32MzDvPvONrYzTI43o1mILi3xNXcoLCZWk6SvSsRcpQkQ290htZcJyDw6sPVzBngD1Kxfs439zAdBxOpqAIFX0FQUp_E2r8WxdBBnwDmRuj4Y67sPEUzfwAuoKTGI8COhuSOZCPjD4oGq567Ru83FQB4X1mBkwuVKcaVetQSgPkt13oXq0U4hryynjfsR_8-rPmWDnB"/>
+<!-- Reactive HUD Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent flex flex-col justify-between p-4">
+<div class="flex justify-between items-center">
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest/70 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-primary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> AI FILTER: CYBER_KINETIC_GLOW
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface bg-surface-container-lowest/80 px-2 py-0.5 rounded">00:01:24:18</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">Auto-Snapping: ON</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer text-sm">hd</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer text-sm">fullscreen</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini AI Prompt / Inspector Sidebar -->
+<div class="md:col-span-4 rounded-xl bg-surface-container p-4 flex flex-col justify-between">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-sm">auto_fix_high</span> Prompt Shader
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">v2.0 Neural</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm italic">
+                “Flash electric magenta strobe on heavy drum kicks, subtle 35mm grain on vocals”
+              </div>
+<!-- Parameter Toggles -->
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex justify-between items-center font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">Transient Intensity</span>
+<span class="text-primary font-semibold">92%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-variant overflow-hidden">
+<div class="w-[92%] h-full bg-gradient-to-r from-primary-container to-secondary"></div>
+</div>
+<div class="flex justify-between items-center font-label-mono-sm text-label-mono-sm mt-1">
+<span class="text-on-surface-variant">Chromashift Decay</span>
+<span class="text-secondary font-semibold">0.14s</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-variant overflow-hidden">
+<div class="w-[45%] h-full bg-secondary"></div>
+</div>
+</div>
+</div>
+<div class="pt-3">
+<button class="w-full py-2 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-mono-sm text-label-mono-sm flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-xs">tune</span> Re-Compile GLSL Shader
+              </button>
+</div>
+</div>
+</div>
+<!-- Bottom Multi-Track Sequencer Mockup -->
+<div class="w-full rounded-xl bg-surface-container p-3 flex flex-col gap-2">
+<!-- Timeline Ruler -->
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-outline px-2 pb-1">
+<span>00:00</span>
+<span class="text-primary font-bold text-xs">▼ BEAT DROP (00:01:15)</span>
+<span>00:02</span>
+<span>00:03</span>
+<span>00:04</span>
+</div>
+<!-- Video Clip Track (Track 1) -->
+<div class="relative w-full h-9 rounded-lg bg-surface-container-low flex items-center px-1 gap-1 overflow-hidden">
+<span class="absolute left-2 font-label-mono-sm text-label-mono-sm text-on-surface-variant z-10 bg-surface-container-low/80 px-1 rounded">V1: A-Roll</span>
+<div class="h-7 w-28 rounded bg-secondary-container/40 flex items-center px-2 font-label-mono-sm text-label-mono-sm text-on-surface truncate">Clip_01.mp4</div>
+<div class="h-7 w-48 rounded bg-primary-container/30 flex items-center px-2 font-label-mono-sm text-label-mono-sm text-primary truncate">Clip_02_JumpCut.mp4</div>
+<div class="h-7 flex-1 rounded bg-secondary-container/40 flex items-center px-2 font-label-mono-sm text-label-mono-sm text-on-surface truncate">Clip_03_FinalDrop.mp4</div>
+</div>
+<!-- Audio Waveform Beat Track (Track 2) -->
+<div class="relative w-full h-14 rounded-lg bg-surface-container-lowest flex items-center px-2 overflow-hidden">
+<span class="absolute left-2 font-label-mono-sm text-label-mono-sm text-primary z-10 bg-surface-container-lowest/80 px-1 rounded">A1: Neon_Pulse_128BPM.wav</span>
+<!-- Simulated Waveform Bars -->
+<div class="w-full flex items-center justify-between gap-[2px] opacity-75 h-10">
+<div class="w-1 bg-outline-variant h-2"></div>
+<div class="w-1 bg-outline-variant h-4"></div>
+<div class="w-1 bg-outline-variant h-6"></div>
+<div class="w-1 bg-primary h-8"></div>
+<div class="w-1 bg-primary-container h-10 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
+<div class="w-1 bg-outline-variant h-3"></div>
+<div class="w-1 bg-outline-variant h-5"></div>
+<div class="w-1 bg-primary h-9"></div>
+<div class="w-1 bg-primary-container h-10"></div>
+<div class="w-1 bg-outline-variant h-4"></div>
+<div class="w-1 bg-secondary h-8"></div>
+<div class="w-1 bg-secondary-container h-10"></div>
+<div class="w-1 bg-outline-variant h-2"></div>
+<div class="w-1 bg-primary h-7"></div>
+<div class="w-1 bg-primary-container h-10 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
+<div class="w-1 bg-outline-variant h-4"></div>
+<div class="w-1 bg-outline-variant h-6"></div>
+<div class="w-1 bg-secondary h-9"></div>
+<div class="w-1 bg-secondary h-10"></div>
+<div class="w-1 bg-outline-variant h-3"></div>
+<div class="w-1 bg-outline-variant h-5"></div>
+<div class="w-1 bg-primary h-8"></div>
+<div class="w-1 bg-primary-container h-10"></div>
+<div class="w-1 bg-outline-variant h-2"></div>
+<div class="w-1 bg-outline-variant h-4"></div>
+<div class="w-1 bg-secondary h-8"></div>
+<div class="w-1 bg-secondary h-10"></div>
+<div class="w-1 bg-outline-variant h-5"></div>
+</div>
+<!-- Playhead Scrub Line -->
+<div class="absolute left-1/3 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary-container to-secondary pointer-events-none shadow-[0_0_12px_rgba(34,211,238,0.9)]">
+<div class="w-2.5 h-2.5 -ml-[4px] -top-1 bg-primary-container rotate-45"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE SOUND & FILTER DEMO BAR -->
+<section class="w-full max-w-7xl mx-auto px-4 md:px-8 my-10">
+<div class="w-full rounded-2xl bg-surface-container-low p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+<!-- Glow ambient background -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-secondary/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-2 max-w-md">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold tracking-wider text-primary uppercase">Live Visualizer Engine</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Interactive 128 BPM Pulse Matcher</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tap to trigger transient audio cuts and preview realtime shader reaction times down to 4.2ms.</p>
+</div>
+<!-- Interactive Soundwave Rhythm Display -->
+<div class="flex-1 flex flex-col items-center justify-center w-full max-w-lg">
+<div class="w-full h-16 bg-surface-container-lowest rounded-xl flex items-end justify-between px-4 py-2 gap-1.5 cursor-pointer select-none" id="visualizer-container">
+<div class="viz-bar w-1.5 bg-primary/40 rounded-full transition-all duration-75 h-4"></div>
+<div class="viz-bar w-1.5 bg-primary-container rounded-full transition-all duration-75 h-8"></div>
+<div class="viz-bar w-1.5 bg-primary rounded-full transition-all duration-75 h-12"></div>
+<div class="viz-bar w-1.5 bg-secondary rounded-full transition-all duration-75 h-6"></div>
+<div class="viz-bar w-1.5 bg-secondary-container rounded-full transition-all duration-75 h-14"></div>
+<div class="viz-bar w-1.5 bg-primary rounded-full transition-all duration-75 h-7"></div>
+<div class="viz-bar w-1.5 bg-primary-container rounded-full transition-all duration-75 h-10"></div>
+<div class="viz-bar w-1.5 bg-secondary rounded-full transition-all duration-75 h-14"></div>
+<div class="viz-bar w-1.5 bg-primary rounded-full transition-all duration-75 h-5"></div>
+<div class="viz-bar w-1.5 bg-primary-container rounded-full transition-all duration-75 h-11"></div>
+<div class="viz-bar w-1.5 bg-secondary-container rounded-full transition-all duration-75 h-13"></div>
+<div class="viz-bar w-1.5 bg-primary rounded-full transition-all duration-75 h-8"></div>
+<div class="viz-bar w-1.5 bg-primary-container rounded-full transition-all duration-75 h-14"></div>
+<div class="viz-bar w-1.5 bg-secondary rounded-full transition-all duration-75 h-6"></div>
+<div class="viz-bar w-1.5 bg-primary rounded-full transition-all duration-75 h-10"></div>
+<div class="viz-bar w-1.5 bg-primary-container rounded-full transition-all duration-75 h-12"></div>
+</div>
+<div class="w-full flex justify-between items-center mt-2 px-1 font-label-mono-sm text-label-mono-sm text-outline">
+<span>Click to modulate waveform</span>
+<span class="text-primary font-bold" id="bpm-counter">128 BPM • TRANSIENT SYNC ACTIVE</span>
+</div>
+</div>
+<!-- Trigger Action -->
+<button class="px-5 py-2.5 rounded-lg bg-surface-container font-label-mono-sm text-label-mono-sm text-on-surface hover:bg-surface-variant flex items-center gap-2 shadow transition-all active:scale-95 shrink-0" id="pulse-btn">
+<span class="material-symbols-outlined text-primary text-sm">graphic_eq</span>
+<span>Tap Beat Transient</span>
+</button>
+</div>
+</section>
+<!-- FEATURE GRID SECTION (6 CARDS) -->
+<section class="w-full max-w-7xl mx-auto px-4 md:px-8 py-16">
+<div class="text-center max-w-3xl mx-auto mb-14">
+<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-widest text-primary font-bold">Precision Architecture</span>
+<h2 class="mt-2 font-headline-md text-headline-md md:text-3xl font-bold text-on-surface">Engineered for Beat-Driven Workflows</h2>
+<p class="mt-4 font-body-md text-body-md text-on-surface-variant">The friction of manual video slicing is gone. Create high-energy shorts, commercials, and reels synced precisely to each acoustic peak.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Feature Card 1 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(34,211,238,0.1)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary-container to-primary flex items-center justify-center text-on-primary-container mb-5 shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+<span class="material-symbols-outlined text-2xl">auto_videocam</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Beat-Synced Editing</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Auto-detects audio transients and automatically snaps cuts, transitions, and text animations to the rhythm with zero manual markers.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-primary">
+<span>Transient Snapping</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Feature Card 2 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-secondary-container to-secondary flex items-center justify-center text-on-secondary mb-5 shadow-[0_0_15px_rgba(139,92,246,0.4)]">
+<span class="material-symbols-outlined text-2xl">magic_button</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">Prompt-to-Filter AI</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Describe any aesthetic in natural language. Our neural engine compiles real-time GLSL visual shaders, optical flares, and dynamic color grades.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-secondary">
+<span>GLSL Shader Generator</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Feature Card 3 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(34,211,238,0.1)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center text-on-primary-container mb-5 shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+<span class="material-symbols-outlined text-2xl">layers</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Multi-Track Timeline</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Fluid non-linear desktop timeline with unlimited video, B-roll, subtitle, and multi-channel audio tracks with frame-accurate scrubbing.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-primary">
+<span>Infinite Canvas Stacking</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Feature Card 4 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-secondary to-primary-container flex items-center justify-center text-on-primary-container mb-5 shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+<span class="material-symbols-outlined text-2xl">speed</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Real-Time GPU Preview</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Zero lag playback with WebGPU acceleration. Scrub 4K 60FPS video smoothly without pre-rendering costly proxies or losing precious battery.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-primary">
+<span>WebGPU Native 60FPS</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Feature Card 5 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(34,211,238,0.1)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center text-on-primary mb-5 shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+<span class="material-symbols-outlined text-2xl">ios_share</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-secondary transition-colors">One-Click Multi-Platform</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Export custom aspect ratios (9:16 vertical, 16:9 cinematic, 1:1 square) simultaneously in 4K with instant cloud download and scheduling.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-secondary">
+<span>Universal Ratios</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- Feature Card 6 -->
+<div class="p-6 rounded-2xl bg-surface-container-low/90 backdrop-blur-xl shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-secondary-container to-primary flex items-center justify-center text-on-primary mb-5 shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+<span class="material-symbols-outlined text-2xl">library_music</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Curated Sound Library</h3>
+<p class="mt-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Over 10,000 royalty-free beat tracks, separated audio stems, kinetic typography presets, and community cyberpunk shaders.
+          </p>
+</div>
+<div class="mt-6 pt-4 flex items-center justify-between font-label-mono-sm text-label-mono-sm text-primary">
+<span>10k+ Royalty-Free Assets</span>
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+</div>
+</section>
+<!-- VISUAL BENTO GALLERY: REALTIME WORKFLOW -->
+<section class="w-full max-w-7xl mx-auto px-4 md:px-8 py-12">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-7 rounded-2xl bg-surface-container-low p-6 md:p-8 flex flex-col justify-between overflow-hidden relative shadow-lg">
+<div class="relative z-10">
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase font-bold">Zero Friction Ingest</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mt-2">Drop Stems. Match Video. Go Viral.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-lg">Pulsecut segments audio into drum, bass, vocal, and synth tracks, highlighting ideal moments for hard-hitting jump cuts.</p>
+</div>
+<div class="relative z-10 mt-6 rounded-xl overflow-hidden shadow-2xl aspect-[16/9]">
+<img class="w-full h-full object-cover" data-alt="Close up screenshot of digital audio waveform analyzer showing distinct color-coded frequencies, glowing transients, and auto-snap drop markers on a sleek dark UI workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsyYeKhgNIqDFRbOPFXXFg9Xxbu_Dd8xfGyP5yd0vAfn2S51WQKe1SiRHsdJAiW6gSjurDMQHXJa5kXdHduFcBUkJskX1_aOQU-XzgKJAV_JFTRBLnkq47PpeFj2rYm1QrSqYrkTyeis_UgYg7WCouGcMUFNZtvmKwtR9zSBSr6HepYzbTjZpccyurJqKGJiPD1j22PIWmC-hq4_p97_PCNp4FBHte61LfFvgaKI8f"/>
+</div>
+</div>
+<div class="md:col-span-5 rounded-2xl bg-surface-container-low p-6 md:p-8 flex flex-col justify-between overflow-hidden relative shadow-lg">
+<div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary uppercase font-bold">Neural Engine Benchmarks</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mt-2">12x Faster Rendering</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Compare export speeds across contemporary browser video tools.</p>
+<div class="mt-8 flex flex-col gap-4">
+<div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-on-surface mb-1">
+<span class="text-primary font-bold">Pulsecut 2.0 WebGPU</span>
+<span>1.4s / 60s Reel</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-variant overflow-hidden">
+<div class="w-[94%] h-full bg-gradient-to-r from-primary-container to-secondary"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant mb-1">
+<span>Traditional Web NLE</span>
+<span>18.2s / 60s Reel</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-variant overflow-hidden">
+<div class="w-[25%] h-full bg-outline"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 rounded-xl bg-surface-container flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">verified</span>
+<span class="font-body-sm text-body-sm text-on-surface">Lossless ProRes &amp; H.265 hardware-accelerated encodings supported.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL CTA SECTION -->
+<section class="w-full max-w-7xl mx-auto px-4 md:px-8 py-20">
+<div class="relative w-full rounded-3xl bg-surface-container-low/95 p-8 md:p-16 overflow-hidden shadow-2xl flex flex-col items-center text-center">
+<!-- Radial Accent Backlight -->
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-primary-container/20 via-secondary-container/25 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl flex flex-col items-center">
+<span class="px-3.5 py-1 rounded-full font-label-mono-sm text-label-mono-sm bg-primary/10 text-primary font-semibold uppercase tracking-wider mb-4">Start In Seconds</span>
+<h2 class="font-display-lg text-display-lg md:text-5xl font-bold text-on-surface leading-tight">
+          Ready to create your next viral drop?
+        </h2>
+<p class="mt-4 font-body-md text-body-md text-on-surface-variant">
+          Join 450,000+ creators pushing the boundaries of kinetic video. No credit card required. Free tier forever.
+        </p>
+<!-- Email Ingest Field & Submit Button -->
+<form class="mt-8 w-full max-w-md flex flex-col sm:flex-row gap-2 relative" id="waitlist-form">
+<input class="flex-1 px-4 py-3 rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" placeholder="Enter your creator email..." required="" type="email"/>
+<button class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary-container to-secondary font-headline-sm text-headline-sm font-semibold text-on-primary hover:brightness-110 shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all shrink-0" type="submit">
+            Get Early Access
+          </button>
+</form>
+<span class="mt-4 font-label-mono-sm text-label-mono-sm text-outline">
+          ⚡ Instant access • 4K exports included • No CC needed
+        </span>
+</div>
+</div>
+</section>
+<!-- LANDING PAGE FOOTER -->
+<footer class="w-full bg-surface-container-lowest mt-10">
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-14 flex flex-col gap-10">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+<!-- Brand Bio Col -->
+<div class="col-span-2 flex flex-col gap-4">
+<div class="flex items-center gap-space-sm cursor-pointer">
+<img alt="Pulsecut Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCLvHwa4vDy1JiPhz4qrmwf_grfrD3b4NSzI4UiDOtgk9hwF9CwjgVyqBNYN2Mtto4XOF4bjDFOMyokZWsmwhPLHrcoy7mEeVn0xTOOEX3lwcycaTPKW2-wU2J0-q2t2hFeUNBEoNw0BO4q6hsC94CXYoKer7ePANqM2K877wtccRY2OLv8MsRzR1L-iJE0hQCX70BfIjbqXYUuS3eFWB8nW4YYBSyeps_5Q3UQZt-T"/>
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface">PULSECUT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+            The next-generation audio-visual editing suite. Powered by real-time neural shaders and automated transient snapping.
+          </p>
+<div class="flex items-center gap-3 text-on-surface-variant mt-2">
+<a class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">tag</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">headphones</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">smart_display</span>
+</a>
+<a class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">videocam</span>
+</a>
+</div>
+</div>
+<!-- Links Col: Product -->
+<div class="flex flex-col gap-3">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-primary tracking-wider">Product</span>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Beat Detector</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">AI Shader Prompts</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">WebGPU Speed</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Stem Splitter</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Pricing Plans</a>
+</div>
+<!-- Links Col: Company -->
+<div class="flex flex-col gap-3">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-primary tracking-wider">Company</span>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">About Us</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Creators Lab</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Careers (Hiring)</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Press Kit</a>
+</div>
+<!-- Links Col: Legal -->
+<div class="flex flex-col gap-3">
+<span class="font-label-mono-sm text-label-mono-sm font-semibold uppercase text-primary tracking-wider">Legal</span>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Music Licensing</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Cookie Preferences</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between pt-6 text-outline font-label-mono-sm text-label-mono-sm">
+<div>© 2025 Pulsecut Inc. All rights reserved. Beat-sync patent pending.</div>
+<div class="flex items-center gap-4 mt-4 md:mt-0">
+<span>STATUS: OPERATIONAL</span>
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+</div>
+</div>
+</div>
+</footer>
+<!-- CLIENT-SIDE MICRO INTERACTIONS -->
+<script>
+    (function initLandingInteractive() {
+      const vizBars = document.querySelectorAll('.viz-bar');
+      const pulseBtn = document.getElementById('pulse-btn');
+      const vizContainer = document.getElementById('visualizer-container');
+
+      function triggerRandomPulse() {
+        vizBars.forEach(bar => {
+          const randomH = Math.floor(Math.random() * 45) + 12;
+          bar.style.height = `${randomH}px`;
+        });
+      }
+
+      if (pulseBtn) {
+        pulseBtn.addEventListener('click', triggerRandomPulse);
+      }
+      if (vizContainer) {
+        vizContainer.addEventListener('click', triggerRandomPulse);
+      }
+
+      // Continuous ambient beat modulation
+      setInterval(() => {
+        vizBars.forEach(bar => {
+          const currentH = parseInt(bar.style.height || '20');
+          const delta = (Math.random() - 0.5) * 16;
+          const newH = Math.min(56, Math.max(8, currentH + delta));
+          bar.style.height = `${newH}px`;
+        });
+      }, 350);
+
+      // Simple form acknowledgment
+      const form = document.getElementById('waitlist-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const btn = form.querySelector('button');
+          if (btn) {
+            btn.textContent = 'Invite Sent!';
+            btn.classList.add('bg-primary');
+          }
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low border-t border-white/[0.08] py-space-xl"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-sm"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">PULSECUT AUDIO-VISUAL ENGINE</span><span class="text-outline">v2.4.0-kinetic</span></div><div class="text-outline">© 2025 Pulsecut AI. Engineered for beat-driven workflows.</div></div></footer></body></html>

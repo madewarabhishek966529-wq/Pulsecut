@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary":"#3c0091","on-background":"#e4e1e9","outline-variant":"#3c494c","surface-container":"#1f1f25","error":"#ffb4ab","on-primary-fixed-variant":"#004e5a","surface-variant":"#35343a","on-primary-fixed":"#001f25","inverse-on-surface":"#303036","error-container":"#93000a","primary":"#8aebff","surface-container-highest":"#35343a","tertiary-container":"#ffa7c9","primary-fixed-dim":"#2fd9f4","surface-dim":"#131318","primary-container":"#22d3ee","on-secondary-container":"#c4abff","on-error-container":"#ffdad6","on-error":"#690005","on-tertiary-fixed":"#3e0022","on-secondary-fixed":"#23005c","tertiary-fixed-dim":"#ffb0cd","surface-container-lowest":"#0e0e13","outline":"#859397","surface":"#131318","on-primary-container":"#005763","on-secondary-fixed-variant":"#5516be","surface-bright":"#39383e","on-tertiary":"#640039","secondary-fixed":"#e9ddff","secondary-fixed-dim":"#d0bcff","secondary-container":"#571bc1","surface-container-low":"#1b1b20","inverse-primary":"#006877","background":"#131318","secondary":"#d0bcff","on-surface-variant":"#bbc9cd","inverse-surface":"#e4e1e9","tertiary-fixed":"#ffd9e4","primary-fixed":"#a2eeff","on-tertiary-container":"#9b005c","on-surface":"#e4e1e9","surface-container-high":"#2a292f","on-tertiary-fixed-variant":"#8c0053","surface-tint":"#2fd9f4","tertiary":"#ffd0e0","on-primary":"#00363e"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","space-lg":"1rem","gutter-desktop":"1rem","margin-desktop":"1.25rem","space-md":"0.75rem",gutter:"0.75rem",margin:"0.75rem","space-sm":"0.5rem","space-xl":"1.5rem"},fontFamily:{"label-mono-md":["JetBrains Mono"],"label-mono-lg":["JetBrains Mono"],"body-md":["Inter"],"body-sm":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"display-lg":["Inter"],"label-mono-sm":["JetBrains Mono"]},fontSize:{"label-mono-md":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}],"label-mono-lg":["1rem",{lineHeight:"1.25rem",letterSpacing:"-0.02em",fontWeight:"600"}],"body-md":["0.875rem",{lineHeight:"1.375rem",fontWeight:"400"}],"body-sm":["0.75rem",{lineHeight:"1.125rem",fontWeight:"400"}],"headline-md":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-sm":["1.125rem",{lineHeight:"1.5rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.025em",fontWeight:"700"}],"label-mono-sm":["0.6875rem",{lineHeight:"0.875rem",letterSpacing:"0.04em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 h-12 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-white/[0.08]"><div class="w-full h-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Pulsecut Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCLvHwa4vDy1JiPhz4qrmwf_grfrD3b4NSzI4UiDOtgk9hwF9CwjgVyqBNYN2Mtto4XOF4bjDFOMyokZWsmwhPLHrcoy7mEeVn0xTOOEX3lwcycaTPKW2-wU2J0-q2t2hFeUNBEoNw0BO4q6hsC94CXYoKer7ePANqM2K877wtccRY2OLv8MsRzR1L-iJE0hQCX70BfIjbqXYUuS3eFWB8nW4YYBSyeps_5Q3UQZt-T"/><span class="font-headline-sm text-headline-sm font-bold tracking-tight bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.45)]">PULSECUT</span></div><div class="h-4 w-px bg-outline-variant/40 hidden sm:block"></div><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-bold"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="editor" href="#">Editor</a><a aria-current="page" class="transition-colors text-primary font-bold" data-path="dashboard" href="#">Dashboard</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-filters" href="#">AI Filters</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="export" href="#">Export</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="landing-preview" href="#">Landing Preview</a></nav></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded bg-surface-container-low/80 border border-white/[0.06]"><span class="material-symbols-outlined text-[16px] text-primary">movie_filter</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface font-medium truncate max-w-[200px]">Cyber_Beat_Drop_v2.mp4</span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span><span class="font-label-mono-sm text-label-mono-sm text-outline">Saved</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-on-surface-variant"><button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high hover:text-on-surface transition-all" title="Undo (Ctrl+Z)" type="button"><span class="material-symbols-outlined text-[18px]">undo</span></button><button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high hover:text-on-surface transition-all" title="Redo (Ctrl+Y)" type="button"><span class="material-symbols-outlined text-[18px]">redo</span></button></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-white/[0.06]" title="Cloud Sync Active"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant hidden md:inline">Synced</span></div><span class="px-space-sm py-0.5 rounded font-label-mono-sm text-label-mono-sm font-semibold tracking-wider uppercase bg-secondary-container text-on-secondary-container shadow-[0_0_12px_rgba(87,27,193,0.4)]">PRO</span><div class="p-[1.5px] rounded-full bg-gradient-to-tr from-primary via-primary-container to-secondary shadow-[0_0_10px_rgba(34,211,238,0.3)] cursor-pointer"><img alt="Profile" class="w-7 h-7 rounded-full object-cover block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuDU3sw0RYvW8Uk-MNFvHO76kLiamk7YdfGfbjAT-axHGItDLADTi23RxbhggmbQ3SPfAvHKOpDZa6NYwDUR3jp1iwUe69QX72ZV2rn202jJb8l48LN64aaqYUGz9Yq7OF_kj8YItOiHyHUnG941o-FewDrBvWAU2h1d0wrElZjMnLstpFz1lM03Rm686tGBSmXkwbrKeLVHaF9m7FSjYpY6AGThaSkJGzy52UzseM"/></div></div></div></header><aside class="fixed left-0 top-12 bottom-0 w-16 bg-surface-container-low/80 backdrop-blur-xl border-r border-white/[0.08] z-40 flex flex-col justify-between items-center py-space-md"><div class="flex flex-col gap-space-sm w-full px-space-xs"><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary hover:bg-surface-container-high transition-colors" title="Media Bin" type="button"><span class="material-symbols-outlined text-[20px]">perm_media</span><span class="font-label-mono-sm text-[9px] mt-0.5">Media</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="AI Beat Detection" type="button"><span class="material-symbols-outlined text-[20px]">graphic_eq</span><span class="font-label-mono-sm text-[9px] mt-0.5">Beats</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Video Effects" type="button"><span class="material-symbols-outlined text-[20px]">auto_awesome</span><span class="font-label-mono-sm text-[9px] mt-0.5">FX</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Audio Transitions" type="button"><span class="material-symbols-outlined text-[20px]">equalizer</span><span class="font-label-mono-sm text-[9px] mt-0.5">Audio</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Color Grading" type="button"><span class="material-symbols-outlined text-[20px]">palette</span><span class="font-label-mono-sm text-[9px] mt-0.5">Color</span></button></div><div class="flex flex-col gap-space-sm w-full px-space-xs"><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Keyboard Shortcuts" type="button"><span class="material-symbols-outlined text-[18px]">keyboard</span></button><button class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Platform Settings" type="button"><span class="material-symbols-outlined text-[18px]">tune</span></button></div></aside><div class="pl-16"><main class="relative w-full pt-12 min-h-screen bg-surface-container-lowest"><div class="flex flex-col w-full">
+<div class="relative w-full px-space-md lg:px-space-xl py-space-lg flex flex-col gap-space-xl">
+<!-- Ambient Neon Studio Underglows -->
+<div class="pointer-events-none absolute top-12 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-[128px]"></div>
+<div class="pointer-events-none absolute top-48 right-12 w-80 h-80 bg-secondary-container/15 rounded-full blur-[140px]"></div>
+<!-- Top Action Bar & Filter Deck -->
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">Projects</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-semibold tracking-wide">12 Projects</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60 hidden sm:block"></span>
+<div class="hidden sm:flex items-center gap-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="material-symbols-outlined text-[15px] text-primary">auto_detect_voice</span>
+<span>AI Audio Engine Active</span>
+</div>
+</div>
+<!-- Controls: Search, Filters, New Project Button -->
+<div class="flex flex-wrap items-center gap-space-sm sm:gap-space-md">
+<!-- Live Search Field with Cyber Accent -->
+<div class="relative flex-1 sm:w-64 min-w-[220px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">search</span>
+<input class="w-full pl-9 pr-space-md py-2 bg-surface-container-low/90 text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-lg focus:outline-none focus:bg-surface-container-high transition-all shadow-sm" placeholder="Search projects, tags, or clips..." type="text"/>
+<kbd class="hidden sm:inline-block absolute right-2.5 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-label-mono-sm text-outline bg-surface-container-highest rounded">⌘K</kbd>
+</div>
+<!-- Filter Dropdown -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-low/90 text-on-surface font-body-sm text-body-sm pl-3 pr-8 py-2 rounded-lg cursor-pointer hover:bg-surface-container-high transition-colors focus:outline-none shadow-sm">
+<option>All Categories</option>
+<option>Vertical Reels (9:16)</option>
+<option>YouTube 16:9</option>
+<option>TikToks &amp; Shorts</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+<!-- Sort Dropdown -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-low/90 text-on-surface font-body-sm text-body-sm pl-3 pr-8 py-2 rounded-lg cursor-pointer hover:bg-surface-container-high transition-colors focus:outline-none shadow-sm">
+<option>Last modified</option>
+<option>Duration</option>
+<option>Name (A-Z)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">swap_vert</span>
+</div>
+<!-- Primary Action Trigger -->
+<button class="relative group flex items-center gap-space-xs px-space-lg py-2 rounded-lg bg-gradient-to-r from-primary-container via-primary to-secondary text-surface-container-lowest font-headline-sm text-body-md font-bold shadow-[0_0_24px_rgba(34,211,238,0.4)] hover:shadow-[0_0_32px_rgba(34,211,238,0.65)] hover:scale-[1.02] active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>New Project</span>
+</button>
+</div>
+</div>
+<!-- Storage & Quick Stats Ribbon -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Metric Card 1: Cloud Storage Meter -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low/75 backdrop-blur-xl p-space-md flex flex-col justify-between shadow-lg group hover:bg-surface-container-low transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">cloud_done</span>
+</div>
+<div>
+<div class="font-headline-sm text-body-sm font-semibold text-on-surface">Cloud Storage</div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">Pro Tier Allocation</div>
+</div>
+</div>
+<span class="font-label-mono-md text-label-mono-md font-bold text-primary">32.1%</span>
+</div>
+<div class="mt-space-md flex flex-col gap-1.5">
+<div class="flex justify-between items-baseline font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface font-semibold">64.2 GB used</span>
+<span class="text-outline">200 GB total</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-container via-primary to-secondary rounded-full w-[32.1%] shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+</div>
+</div>
+</div>
+<!-- Metric Card 2: Beat Detection Stats with Kinetic Sparkline -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low/75 backdrop-blur-xl p-space-md flex flex-col justify-between shadow-lg group hover:bg-surface-container-low transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+</div>
+<div>
+<div class="font-headline-sm text-body-sm font-semibold text-on-surface">Synced Beats</div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">Neural Audio Pass</div>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container/60 text-on-secondary-container font-label-mono-sm text-[10px] uppercase font-bold">+18% wk</span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-display-lg text-headline-md font-extrabold text-on-surface tracking-tight">1,420</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Transients indexed</span>
+</div>
+<!-- Sparkline Mini Chart -->
+<div class="h-8 w-28 flex items-end gap-1">
+<div class="w-2.5 bg-secondary-container rounded-t-sm h-[35%]"></div>
+<div class="w-2.5 bg-secondary-container rounded-t-sm h-[50%]"></div>
+<div class="w-2.5 bg-secondary-container rounded-t-sm h-[40%]"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm h-[75%] shadow-[0_0_8px_rgba(208,188,255,0.4)]"></div>
+<div class="w-2.5 bg-secondary-container rounded-t-sm h-[60%]"></div>
+<div class="w-2.5 bg-secondary rounded-t-sm h-[90%] shadow-[0_0_8px_rgba(208,188,255,0.5)]"></div>
+<div class="w-2.5 bg-primary-container rounded-t-sm h-[100%] shadow-[0_0_10px_rgba(34,211,238,0.7)]"></div>
+</div>
+</div>
+</div>
+<!-- Metric Card 3: Exported Clips & Renders -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low/75 backdrop-blur-xl p-space-md flex flex-col justify-between shadow-lg group hover:bg-surface-container-low transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">movie</span>
+</div>
+<div>
+<div class="font-headline-sm text-body-sm font-semibold text-on-surface">Exported Videos</div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">Render Node Cluster</div>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary flex items-center gap-0.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Ready
+          </span>
+</div>
+<div class="mt-space-md flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-display-lg text-headline-md font-extrabold text-on-surface tracking-tight">38 clips</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Master grade ProRes / MP4</span>
+</div>
+<div class="flex items-center -space-x-1.5">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-label-mono-sm font-bold text-on-surface">4K</div>
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-label-mono-sm font-bold text-primary">60</div>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-label-mono-sm font-bold text-secondary">HDR</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Projects Grid (3x3 Architecture) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Recent Sequences</span>
+<span class="text-outline font-label-mono-sm text-label-mono-sm">Sorted by recent revisions</span>
+</div>
+<div class="flex items-center gap-space-xs text-outline">
+<button class="p-1 rounded bg-surface-container-high text-primary hover:text-on-surface transition-colors" title="Grid View" type="button">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-on-surface transition-colors" title="List View" type="button">
+<span class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-lg">
+<!-- CARD 1: Cyberpunk Neon Reel (Vertical 9:16 Hero Preview Card) -->
+<div class="group relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col">
+<!-- Aspect ratio wrapper with Vertical Frame containment -->
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Futuristic neon Tokyo alleyway at rain night with electric cyan and magenta reflections, cinematic cyber aesthetic, high contrast, hyper realistic film still 9:16 vertical composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD24jidyHiExR1bFvz_eykXVe_zJT4brJ0ChgVrseyGhxcJTAROe3TS-rF2NUdgnREKs87TuOz7u0ygsi51PDYIXlJ7pfGxGsvvidkPBiIbVEU8Q0QwSQVJPn4W7qgHQt_qmsf86r0AkTugPe7GDElx7pqV0Ih19QGPZkWlodvzNnmtSKtk0sKvTHrJsKQMhsPgKbgXrJGZIBqKfAmCwymT8u6SxbTm3heehVPAAYFz"/>
+<!-- Vertical frame ratio badge overlay -->
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-primary font-bold">
+              9:16 Reel
+            </div>
+<!-- Duration Badge -->
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">
+              00:32
+            </div>
+<!-- Hover Play Button Glow Interaction -->
+<div class="absolute inset-0 bg-surface-container-lowest/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.7)] group-hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[28px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<!-- Metadata Section -->
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Cyberpunk Neon Reel</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edited 10 mins ago</p>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Project Options" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                Beat Sync
+              </span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-label-mono-sm text-label-mono-sm font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                AI Filter
+              </span>
+<span class="font-label-mono-sm text-[10px] text-outline ml-auto">1080x1920</span>
+</div>
+</div>
+</div>
+<!-- CARD 2: Hyperpop Music Video Drop (16:9 4K Preview) -->
+<div class="group relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col">
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Vibrant iridescent hyperpop visualizer with distorted 3D chrome typography, laser beams in violet and cyan, chaotic energetic musical beat drop atmosphere in 4K widescreen studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiFhtTqHkZCbosnyoOI58fLtaFOz4Q-VRUQQCXzG5vx2kkmUiA2qFtbP0NMm20rJGZf6QJ8A8RKJDRjb9_4RfxBDZGfBCJe-bJlCLwMSnGKuudXAaRLc-7ehZeIe7KMRO14qTyAfjYOaUb2dX112Ob3FCTlrS0aZxoY4qJxwKtkogDRv7JU2FBkL2OQt5LnuN6JRap4nlhvIBMIX4QG7T_gc8-G0erjABZ2XL8r3g9"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-secondary font-bold">
+              16:9 Ultra-HD
+            </div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">
+              02:45
+            </div>
+<!-- Hover Play Button Glow Interaction -->
+<div class="absolute inset-0 bg-surface-container-lowest/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.7)] group-hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[28px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Hyperpop Music Video Drop</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edited 2 hours ago</p>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Project Options" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-sm text-label-mono-sm font-medium">4K 60fps</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-medium">BPM 140</span>
+<span class="font-label-mono-sm text-[10px] text-outline ml-auto">ProRes 422</span>
+</div>
+</div>
+</div>
+<!-- CARD 3: Tokyo Drift - Speed Ramp (16:9 Preview) -->
+<div class="group relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col">
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Night racing sports car drifting on wet asphalt highway with extreme motion blur, orange tail-light streaks, sharp cyan underglow lighting, cinematic high action frame" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfj3v5SrQOkOwnEi56CSe2oJAgagnYQbFG-XXXmNhp6Q8WHobsdeKRCLJ7UegZDFitGmi4oU128hRY2H757MfRZKF-9FC7HrPHTM0e_OQbaw5wdlbvLa1EvlgMn-nGJRY5kN4znwVMmekiyRZ-91gkwegpU-tLUEww0__HPcasoUcpMCdeRDLp92RFlI80UrpDf4lo1dv5mlBDFvlldX9vg1v72QU4OP8qooj0Lc-1"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-bold">
+              16:9 Standard
+            </div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">
+              00:58
+            </div>
+<!-- Hover Play Button Glow Interaction -->
+<div class="absolute inset-0 bg-surface-container-lowest/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.7)] group-hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[28px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Tokyo Drift - Speed Ramp</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edited Yesterday</p>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Project Options" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-medium">Speed Curve</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-sm text-label-mono-sm font-medium">Optical Flow</span>
+<span class="font-label-mono-sm text-[10px] text-outline ml-auto">120 FPS Raw</span>
+</div>
+</div>
+</div>
+<!-- CARD 4: Cinematic Travel Vlog EP4 -->
+<div class="group relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col">
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Moody cinematic drone shot over coastal Iceland black sand beach with dramatic rolling waves, teal ocean swells and volcanic rock cliffs, atmospheric foggy morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtej1kYy8KLvzYISPGjTbdOe3V8YzIqANb5NQ7orw-mUa0Ir8VBmW6VfTKQxSjQcqOphaJiSrV-mQAD3PQ_CYxj9eUHbY538tjIPH7ldceTFLR23uTLCsdVfYKQzw3E0kkCTuy-sIey-zzk2OJH_fv5-dNb9DdNZvu-voMzYjAr4go3wVD-zr0rhRt4vuLaaIX4nLsylY0dN4kK5fSANa6A2cXOB1RGqdnlJNelY0s"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-bold">
+              16:9 Scope
+            </div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">
+              04:12
+            </div>
+<!-- Hover Play Button Glow Interaction -->
+<div class="absolute inset-0 bg-surface-container-lowest/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.7)] group-hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[28px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Cinematic Travel Vlog EP4</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edited 3 days ago</p>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Project Options" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-label-mono-sm text-label-mono-sm font-medium">Color Grade</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-sm text-label-mono-sm font-medium">Rec.709</span>
+<span class="font-label-mono-sm text-[10px] text-outline ml-auto">LUTs: Arctic V2</span>
+</div>
+</div>
+</div>
+<!-- CARD 5: Skeleton Loading Card (Pulse Shimmering Generating Project) -->
+<div class="relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl flex flex-col animate-pulse">
+<!-- Thumbnail shimmer box -->
+<div class="relative w-full h-56 bg-surface-container-high flex flex-col items-center justify-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[22px] animate-spin">cyclone</span>
+</div>
+<div class="font-label-mono-sm text-label-mono-sm text-primary font-semibold tracking-wider uppercase">Generating AI Cuts...</div>
+<div class="w-32 h-1 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full w-2/3 animate-[pulse_1s_ease-in-out_infinite]"></div>
+</div>
+</div>
+<!-- Metadata skeleton lines -->
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="w-full flex flex-col gap-2">
+<div class="h-5 bg-surface-container-highest rounded w-3/4"></div>
+<div class="h-3.5 bg-surface-container-highest/60 rounded w-1/3"></div>
+</div>
+<div class="w-6 h-6 bg-surface-container-highest rounded"></div>
+</div>
+<div class="flex items-center gap-2 pt-space-xs">
+<div class="h-4 bg-surface-container-highest rounded w-16"></div>
+<div class="h-4 bg-surface-container-highest rounded w-20"></div>
+<div class="h-3 bg-surface-container-highest/50 rounded w-12 ml-auto"></div>
+</div>
+</div>
+</div>
+<!-- CARD 6: Retro Synthwave Promo -->
+<div class="group relative rounded-xl bg-surface-container-low/80 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-[0_12px_36px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col">
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Retro 1980s synthwave perspective wireframe grid vanishing to a purple neon sunset, glitchy scanlines, low fidelity VHS artifacts, chromatic aberration glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4lBUMCWVJvKvMRHwnOKH5Jym08WPHSbtRZ-mTEiEnI8sAQ_i0PKpo-gF_V0miuMbsh5pOuJjiV3uBZehAWJj2rsIKfPjSeEseRIArcegQe4pKPAgQdQuA5W42rUe_zADaYopojxO1Q_SMJyhVtmST3tBrbwTEj2sGe0lyCIlDO7olD6ohUT0MVNfn5zwtyJOCeGmM6qIL-Ca3jeCvR-_vbUeyJUiz3tS2eBFwNrWV"/>
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-bold">
+              1:1 Square
+            </div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/85 backdrop-blur-md font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">
+              01:15
+            </div>
+<!-- Hover Play Button Glow Interaction -->
+<div class="absolute inset-0 bg-surface-container-lowest/40 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-opacity flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.7)] group-hover:scale-110 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[28px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-space-sm flex-1 justify-between bg-surface-container-low/95">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate group-hover:text-primary transition-colors">Retro Synthwave Promo</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edited May 12</p>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Project Options" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-medium">VHS Glitch</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-sm text-label-mono-sm font-medium">Audio Ducking</span>
+<span class="font-label-mono-sm text-[10px] text-outline ml-auto">Archive</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Section: Collaboration & Empty State Exploration -->
+<div class="flex flex-col gap-space-md pt-space-md">
+<!-- Tabs Navigation Header -->
+<div class="flex items-center justify-between border-b border-white/[0.06] pb-space-sm">
+<div class="flex items-center gap-space-lg">
+<button class="font-headline-sm text-body-md font-bold text-outline hover:text-on-surface transition-colors" type="button">Templates &amp; Presets</button>
+<button class="font-headline-sm text-body-md font-bold text-primary flex items-center gap-space-xs relative py-1" type="button">
+<span>Shared with Me</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant text-[11px] font-label-mono-sm">0</span>
+<span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+</button>
+<button class="font-headline-sm text-body-md font-bold text-outline hover:text-on-surface transition-colors" type="button">Archived</button>
+</div>
+<span class="hidden sm:inline-block font-label-mono-sm text-label-mono-sm text-outline">Real-time collaboration active</span>
+</div>
+<!-- Glass Empty State Showcase Card -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-low/60 backdrop-blur-xl p-space-xl flex flex-col items-center justify-center text-center shadow-lg my-space-sm">
+<!-- Background Neon Vignette -->
+<div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-30">
+<div class="w-72 h-72 bg-gradient-to-r from-primary-container/20 to-secondary-container/20 rounded-full blur-[80px]"></div>
+</div>
+<!-- Custom Audio Waveform & Collaboration Illustration (Inline SVG under 2KB) -->
+<div class="relative z-10 w-28 h-28 rounded-2xl bg-surface-container-high/70 flex items-center justify-center mb-space-md shadow-[0_0_24px_rgba(0,0,0,0.4)]">
+<svg class="w-14 h-14 text-primary" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<!-- Audio transient waveform bars -->
+<rect fill="currentColor" fill-opacity="0.3" height="8" rx="1.5" width="3" x="6" y="20"></rect>
+<rect fill="currentColor" fill-opacity="0.6" height="20" rx="1.5" width="3" x="12" y="14"></rect>
+<rect fill="currentColor" height="32" rx="1.5" width="3" x="18" y="8"></rect>
+<rect fill="currentColor" fill-opacity="0.7" height="16" rx="1.5" width="3" x="24" y="16"></rect>
+<rect fill="currentColor" height="28" rx="1.5" width="3" x="30" y="10"></rect>
+<rect fill="currentColor" fill-opacity="0.5" height="12" rx="1.5" width="3" x="36" y="18"></rect>
+<!-- Pulsing connection rings -->
+<circle cx="36" cy="12" fill="#d0bcff" r="5" stroke="#131318" stroke-width="2"></circle>
+<circle cx="36" cy="12" r="8" stroke="#d0bcff" stroke-dasharray="2 2" stroke-opacity="0.4" stroke-width="1.5"></circle>
+</svg>
+</div>
+<!-- Typography -->
+<div class="relative z-10 max-w-md flex flex-col items-center gap-space-xs">
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface">No shared projects yet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">
+            Invite your video team, motion designers, or sound engineers to sync timelines, comment with frame-accurate precision, and share AI filters.
+          </p>
+</div>
+<!-- Call to Action -->
+<div class="relative z-10 mt-space-lg flex items-center gap-space-md">
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-surface-container-high text-on-surface font-body-md text-body-md font-semibold hover:bg-surface-container-highest transition-colors shadow-md" type="button">
+<span class="material-symbols-outlined text-[18px]">group_add</span>
+<span>Invite Collaborators</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-primary font-body-md text-body-md hover:bg-surface-container-high/50 transition-colors" type="button">
+<span>Learn about Teams</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>
