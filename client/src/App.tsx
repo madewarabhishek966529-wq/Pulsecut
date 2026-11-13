@@ -1,28 +1,52 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { api } from "@/lib/api";
+import { useState } from "react";
+import { TopBar } from "./components/TopBar";
+import { EditorView } from "./components/EditorView";
+import { DashboardView } from "./components/DashboardView";
+import { LandingPageView } from "./components/LandingPageView";
+import { PromptToFilterModal } from "./components/PromptToFilterModal";
+import { ExportDialog } from "./components/ExportDialog";
 
 export default function App() {
-  const [status, setStatus] = useState<"checking" | "online" | "offline">("checking");
-
-  useEffect(() => {
-    api<{ ok: boolean }>("/health")
-      .then(() => setStatus("online"))
-      .catch(() => setStatus("offline"));
-  }, []);
+  const [activeView, setActiveView] = useState<"editor" | "dashboard" | "landing">("editor");
+  const [isExportOpen, setIsExportOpen] = useState(false);
+  const [isPromptFilterOpen, setIsPromptFilterOpen] = useState(false);
 
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-4">
-      <motion.h1
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 120, damping: 14 }}
-        className="text-5xl font-bold bg-gradient-to-r from-pulse to-pulse-2 bg-clip-text text-transparent"
-      >
-        Pulsecut
-      </motion.h1>
-      <p className="text-muted">Edit at the speed of the beat.</p>
-      <span className="text-xs text-muted">API: {status}</span>
+    <div className="h-full w-full flex flex-col bg-[#0B0C10] text-[#F4EFEA] overflow-hidden">
+      {/* Global Top Bar */}
+      <TopBar
+        activeView={activeView}
+        onChangeView={setActiveView}
+        onOpenExport={() => setIsExportOpen(true)}
+        onOpenAiFilter={() => setIsPromptFilterOpen(true)}
+      />
+
+      {/* Main View Area */}
+      <div className="flex-1 flex min-h-0 overflow-hidden relative">
+        {activeView === "editor" && (
+          <EditorView onOpenPromptFilter={() => setIsPromptFilterOpen(true)} />
+        )}
+        {activeView === "dashboard" && (
+          <DashboardView
+            onOpenEditor={() => setActiveView("editor")}
+            onOpenPromptFilter={() => setIsPromptFilterOpen(true)}
+          />
+        )}
+        {activeView === "landing" && (
+          <LandingPageView onStartEditing={() => setActiveView("editor")} />
+        )}
+      </div>
+
+      {/* Modals & Dialogs */}
+      <PromptToFilterModal
+        isOpen={isPromptFilterOpen}
+        onClose={() => setIsPromptFilterOpen(false)}
+      />
+
+      <ExportDialog
+        isOpen={isExportOpen}
+        onClose={() => setIsExportOpen(false)}
+      />
     </div>
   );
 }

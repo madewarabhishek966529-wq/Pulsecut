@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #07070b;
-  --color-panel: #0f0f16;
-  --color-panel-2: #151520;
-  --color-border: #22222e;
-  --color-text: #e8e8f0;
-  --color-muted: #8a8aa0;
-  --color-pulse: #22d3ee;
-  --color-pulse-2: #8b5cf6;
+  --color-bg: #0b0c10;
+  --color-panel: #121318;
+  --color-panel-2: #1a1c24;
+  --color-border: #262936;
+  --color-text: #f4efea;
+  --color-muted: #9396a5;
+  --color-pulse: #e05a2b;
+  --color-pulse-2: #d97706;
+  --color-pulse-light: #f9a888;
   --color-success: #34d399;
   --color-danger: #f87171;
-  --color-track-video: #22d3ee;
+  --color-track-video: #e05a2b;
   --color-track-audio: #34d399;
   --color-track-text: #f59e0b;
-  --color-track-effect: #8b5cf6;
+  --color-track-effect: #d97706;
 
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -36,7 +37,7 @@
   --dur-fast: 120ms;
   --dur-base: 220ms;
   --dur-slow: 420ms;
-  --gradient-pulse: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  --gradient-pulse: linear-gradient(135deg, #e05a2b, #d97706);
 }
 
 html, body, #root { height: 100%; }
@@ -49,14 +50,14 @@ body {
 }
 
 .glass {
-  background: rgba(15, 15, 22, 0.7);
+  background: rgba(18, 19, 24, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
 }
 
 .btn-primary {
   background: var(--gradient-pulse);
-  color: #07070b;
+  color: #0b0c10;
   font-weight: 600;
   border-radius: var(--radius-md);
   transition: transform var(--dur-fast) var(--ease-out-soft);
@@ -65,7 +66,7 @@ body {
 .btn-primary:active { transform: translateY(0) scale(0.98); }
 
 .skeleton {
-  background: linear-gradient(90deg, #151520 25%, #1d1d2b 50%, #151520 75%);
+  background: linear-gradient(90deg, #1a1c24 25%, #242733 50%, #1a1c24 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
   border-radius: var(--radius-sm);
