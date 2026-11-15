@@ -22,3 +22,6 @@ Client: http://localhost:5173  |  API: http://localhost:4000/api/health
 
 ## Build process
 Open `docs/TASKS.md` and work through it one task at a time with your coding agent. Use the starter prompts in `docs/PROMPTS.md`.
+
+## Phase 2 with Antigravity
+Open this workspace. Rules load from `.agent/rules/pulsecut.md`. For each task T1 to T6, follow the matching prompt in `docs/phase2/`, use Planning mode, and verify with `samples/`. Start with `docs/phase2/00-MASTER.md`.
