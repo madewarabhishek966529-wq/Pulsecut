@@ -37,6 +37,8 @@ interface TimelineState {
     clipId: string,
     transformPatch: Partial<Clip["transform"]>
   ) => void;
+  updateClipProps: (clipId: string, patch: Partial<Clip>) => void;
+  removeEffectFromClip: (clipId: string, effectInstanceId: string) => void;
 
   // Asset Operations
   addAsset: (asset: UIAsset) => void;
@@ -124,6 +126,36 @@ export const useTimelineStore = create<TimelineState>((set, get) => ({
       return { timeline: next };
     }),
 
+  updateClipProps: (clipId, patch) =>
+    set((state) => {
+      const next = updateClip(state.timeline, clipId, patch);
+      return {
+        timeline: next,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
+      };
+    }),
+
+  removeEffectFromClip: (clipId, effectInstanceId) =>
+    set((state) => {
+      const target = state.timeline.tracks
+        .flatMap((t) => t.clips)
+        .find((c) => c.id === clipId);
+      if (!target) return state;
+
+      const updatedClip = {
+        ...target,
+        effects: target.effects.filter((e) => e.id !== effectInstanceId),
+      };
+
+      const next = updateClip(state.timeline, clipId, updatedClip);
+      return {
+        timeline: next,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
+      };
+    }),
+
   addAsset: (asset) =>
     set((state) => {
       const isFirstAsset = state.timeline.assets.length === 0;
@@ -149,6 +181,9 @@ export const useTimelineStore = create<TimelineState>((set, get) => ({
           start: 0,
           end: assetDuration,
           sourceIn: 0,
+          fadeIn: 0,
+          fadeOut: 0,
+          volume: 1,
           transform: {
             x: 0,
             y: 0,

@@ -22,6 +22,14 @@ export class PulsecutRenderer {
       sprite: Sprite;
     }
   >();
+  private imageMedia = new Map<
+    string,
+    {
+      image: HTMLImageElement;
+      texture: Texture;
+      sprite: Sprite;
+    }
+  >();
   private projectWidth = 1080;
   private projectHeight = 1920;
   private isDestroyed = false;
@@ -103,7 +111,17 @@ export class PulsecutRenderer {
       }
     }
 
-    // Add newly imported video assets
+    for (const [id, media] of this.imageMedia.entries()) {
+      if (!currentAssetIds.has(id)) {
+        if (this.projectFrame && media.sprite.parent === this.projectFrame) {
+          this.projectFrame.removeChild(media.sprite);
+        }
+        media.texture.destroy(true);
+        this.imageMedia.delete(id);
+      }
+    }
+
+    // Add newly imported video & image assets
     for (const asset of assets) {
       if (asset.type === "video" && !this.assetMedia.has(asset.id)) {
         const video = document.createElement("video");
@@ -122,7 +140,6 @@ export class PulsecutRenderer {
         const sprite = new Sprite(texture);
         sprite.visible = false;
 
-        // Ensure canvas frame updates when seeking while paused
         video.addEventListener("seeked", () => {
           source.update();
         });
@@ -132,6 +149,18 @@ export class PulsecutRenderer {
         }
 
         this.assetMedia.set(asset.id, { video, source, texture, sprite });
+      } else if (asset.type === "image" && !this.imageMedia.has(asset.id)) {
+        const image = new Image();
+        image.src = asset.url;
+        const texture = Texture.from(image);
+        const sprite = new Sprite(texture);
+        sprite.visible = false;
+
+        if (this.projectFrame) {
+          this.projectFrame.addChild(sprite);
+        }
+
+        this.imageMedia.set(asset.id, { image, texture, sprite });
       }
     }
   }
@@ -152,7 +181,7 @@ export class PulsecutRenderer {
 
     const fps = timeline.project.fps || 30;
 
-    // Find active video clip
+    // Find active video / image clip
     const videoTrack = timeline.tracks.find((t) => t.type === "video");
     const activeClip = videoTrack?.clips.find(
       (c) => time >= c.start && time < c.end
@@ -162,47 +191,81 @@ export class PulsecutRenderer {
     for (const media of this.assetMedia.values()) {
       media.sprite.visible = false;
     }
+    for (const media of this.imageMedia.values()) {
+      media.sprite.visible = false;
+    }
 
     if (activeClip && activeClip.assetId) {
-      const media = this.assetMedia.get(activeClip.assetId);
-      if (media) {
-        this.activeVideoElement = media.video;
+      const videoMedia = this.assetMedia.get(activeClip.assetId);
+      const imageMedia = this.imageMedia.get(activeClip.assetId);
+
+      const clipDuration = activeClip.end - activeClip.start;
+      const localTime = time - activeClip.start;
+      let fadeAlpha = 1;
+      if (activeClip.fadeIn && activeClip.fadeIn > 0 && localTime < activeClip.fadeIn) {
+        fadeAlpha *= Math.max(0, localTime / activeClip.fadeIn);
+      }
+      if (
+        activeClip.fadeOut &&
+        activeClip.fadeOut > 0 &&
+        localTime > clipDuration - activeClip.fadeOut
+      ) {
+        fadeAlpha *= Math.max(0, (clipDuration - localTime) / activeClip.fadeOut);
+      }
+
+      const t = activeClip.transform || {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+      };
+
+      if (videoMedia) {
+        this.activeVideoElement = videoMedia.video;
         const sourceTime = activeClip.sourceIn + (time - activeClip.start);
 
-        // Keep video element synced if paused
-        if (media.video.paused) {
-          const diff = Math.abs(media.video.currentTime - sourceTime);
+        if (videoMedia.video.paused) {
+          const diff = Math.abs(videoMedia.video.currentTime - sourceTime);
           if (diff > 1 / (2 * fps)) {
-            media.video.currentTime = sourceTime;
+            videoMedia.video.currentTime = sourceTime;
           }
         }
 
-        const vw = media.video.videoWidth || this.projectWidth;
-        const vh = media.video.videoHeight || this.projectHeight;
+        const vw = videoMedia.video.videoWidth || this.projectWidth;
+        const vh = videoMedia.video.videoHeight || this.projectHeight;
 
-        // Contain fit inside project frame
         const scale = Math.min(this.projectWidth / vw, this.projectHeight / vh);
-        media.sprite.width = vw * scale;
-        media.sprite.height = vh * scale;
+        videoMedia.sprite.width = vw * scale;
+        videoMedia.sprite.height = vh * scale;
 
-        const t = activeClip.transform || {
-          x: 0,
-          y: 0,
-          scale: 1,
-          rotation: 0,
-          opacity: 1,
-        };
-        media.sprite.x = (this.projectWidth - media.sprite.width) / 2 + (t.x || 0);
-        media.sprite.y = (this.projectHeight - media.sprite.height) / 2 + (t.y || 0);
-        media.sprite.scale.x *= t.scale ?? 1;
-        media.sprite.scale.y *= t.scale ?? 1;
-        media.sprite.rotation = ((t.rotation || 0) * Math.PI) / 180;
-        media.sprite.alpha = t.opacity ?? 1;
-        media.sprite.visible = true;
+        videoMedia.sprite.x = (this.projectWidth - videoMedia.sprite.width) / 2 + (t.x || 0);
+        videoMedia.sprite.y = (this.projectHeight - videoMedia.sprite.height) / 2 + (t.y || 0);
+        videoMedia.sprite.scale.x *= t.scale ?? 1;
+        videoMedia.sprite.scale.y *= t.scale ?? 1;
+        videoMedia.sprite.rotation = ((t.rotation || 0) * Math.PI) / 180;
+        videoMedia.sprite.alpha = (t.opacity ?? 1) * fadeAlpha;
+        videoMedia.sprite.visible = true;
 
-        if (media.video.paused) {
-          media.source.update();
+        if (videoMedia.video.paused) {
+          videoMedia.source.update();
         }
+      } else if (imageMedia) {
+        this.activeVideoElement = null;
+        const iw = imageMedia.image.naturalWidth || this.projectWidth;
+        const ih = imageMedia.image.naturalHeight || this.projectHeight;
+
+        const scale = Math.min(this.projectWidth / iw, this.projectHeight / ih);
+        imageMedia.sprite.width = iw * scale;
+        imageMedia.sprite.height = ih * scale;
+
+        imageMedia.sprite.x = (this.projectWidth - imageMedia.sprite.width) / 2 + (t.x || 0);
+        imageMedia.sprite.y = (this.projectHeight - imageMedia.sprite.height) / 2 + (t.y || 0);
+        imageMedia.sprite.scale.x *= t.scale ?? 1;
+        imageMedia.sprite.scale.y *= t.scale ?? 1;
+        imageMedia.sprite.rotation = ((t.rotation || 0) * Math.PI) / 180;
+        imageMedia.sprite.alpha = (t.opacity ?? 1) * fadeAlpha;
+        imageMedia.sprite.visible = true;
       } else {
         this.activeVideoElement = null;
       }

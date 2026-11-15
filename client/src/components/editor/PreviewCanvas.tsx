@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PulsecutRenderer } from "@/lib/renderer";
 import { useTimelineStore } from "@/store/timelineStore";
+import { TransformGizmo } from "./TransformGizmo";
 
 export function PreviewCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,15 +9,23 @@ export function PreviewCanvas() {
 
   const [isInitializing, setIsInitializing] = useState(true);
   const [initError, setInitError] = useState<string | null>(null);
+  const [stageRect, setStageRect] = useState({ width: 0, height: 0, left: 0, top: 0 });
 
   const timeline = useTimelineStore((s) => s.timeline);
   const currentTime = useTimelineStore((s) => s.currentTime);
   const isPlaying = useTimelineStore((s) => s.isPlaying);
+  const selectedClipId = useTimelineStore((s) => s.selectedClipId);
   const setCurrentTime = useTimelineStore((s) => s.setCurrentTime);
   const setPlaying = useTimelineStore((s) => s.setPlaying);
+  const updateClipTransform = useTimelineStore((s) => s.updateClipTransform);
 
   const duration = timeline.project.duration;
   const hasAssets = timeline.assets.length > 0;
+
+  // Track selected clip if active at currentTime
+  const selectedClip = timeline.tracks
+    .flatMap((t) => t.clips)
+    .find((c) => c.id === selectedClipId && currentTime >= c.start && currentTime <= c.end);
 
   // Initialize Renderer
   useEffect(() => {
@@ -35,7 +44,6 @@ export function PreviewCanvas() {
       .then(() => {
         if (isMounted) {
           setIsInitializing(false);
-          // Initial render
           const state = useTimelineStore.getState();
           renderer.render(state.timeline, state.currentTime);
         }
@@ -50,8 +58,19 @@ export function PreviewCanvas() {
         }
       });
 
+    const updateRect = () => {
+      if (container) {
+        const r = container.getBoundingClientRect();
+        setStageRect({ width: r.width, height: r.height, left: r.left, top: r.top });
+      }
+    };
+    updateRect();
+    const ro = new ResizeObserver(updateRect);
+    ro.observe(container);
+
     return () => {
       isMounted = false;
+      ro.disconnect();
       renderer.destroy();
       rendererRef.current = null;
     };
@@ -80,8 +99,7 @@ export function PreviewCanvas() {
     renderer.render(timeline, currentTime);
   }, [timeline, currentTime, isInitializing, initError]);
 
-  // Playback clock loop (T1 only: rAF throttled to ~30fps)
-  // TODO(T5): replaced by PlaybackController
+  // Playback clock loop
   useEffect(() => {
     if (!isPlaying || isInitializing || initError) return;
 
@@ -130,8 +148,20 @@ export function PreviewCanvas() {
       {/* Pixi Canvas Mounting Container */}
       <div
         ref={containerRef}
-        className="w-full h-full flex items-center justify-center overflow-hidden select-none"
-      />
+        className="w-full h-full flex items-center justify-center overflow-hidden select-none relative"
+      >
+        {/* On-Canvas Direct Manipulation Gizmo */}
+        {selectedClip && stageRect.width > 0 && (
+          <TransformGizmo
+            clip={selectedClip}
+            projectWidth={timeline.project.width}
+            projectHeight={timeline.project.height}
+            stageRect={stageRect}
+            onTransformChange={(patch) => updateClipTransform(selectedClip.id, patch)}
+            onTransformCommit={(patch) => updateClipTransform(selectedClip.id, patch)}
+          />
+        )}
+      </div>
 
       {/* Loading Skeleton */}
       {isInitializing && (
@@ -162,11 +192,10 @@ export function PreviewCanvas() {
           </div>
           <h4 className="text-sm font-semibold text-[#F4EFEA]">No Media Loaded</h4>
           <p className="text-xs text-[#9396A5] mt-1 max-w-xs">
-            Import a video from the Left Panel or click &quot;Load Sample Video&quot; to begin.
+            Import a video or image from the Left Panel to begin.
           </p>
         </div>
       )}
     </div>
   );
 }
-

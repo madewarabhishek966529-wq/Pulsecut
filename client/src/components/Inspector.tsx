@@ -4,6 +4,8 @@ export function Inspector() {
   const selectedClipId = useTimelineStore((s) => s.selectedClipId);
   const timeline = useTimelineStore((s) => s.timeline);
   const updateClipTransform = useTimelineStore((s) => s.updateClipTransform);
+  const updateClipProps = useTimelineStore((s) => s.updateClipProps);
+  const removeEffectFromClip = useTimelineStore((s) => s.removeEffectFromClip);
 
   // Locate the selected clip
   let selectedClip = null;
@@ -24,6 +26,10 @@ export function Inspector() {
     rotation: 0,
     opacity: 1,
   };
+
+  const fadeIn = selectedClip?.fadeIn || 0;
+  const fadeOut = selectedClip?.fadeOut || 0;
+  const volume = selectedClip?.volume ?? 1;
 
   const handleResetTransform = () => {
     if (!selectedClipId) return;
@@ -198,7 +204,77 @@ export function Inspector() {
               </div>
             </div>
 
-            {/* Effects Stack Section */}
+            {/* Fades & Audio Controls (Must-Have 3) */}
+            <div className="space-y-3 bg-[#1A1C24] p-3 rounded-[10px] border border-[#262936]">
+              <span className="text-[12px] font-semibold text-[#F4EFEA] flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[15px] text-[#34D399]">linear_scale</span>
+                Fades & Audio
+              </span>
+
+              {/* Fade In */}
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-[#9396A5]">Fade In</span>
+                  <span className="font-mono text-[#34D399]">{fadeIn.toFixed(1)}s</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="0.1"
+                  value={fadeIn}
+                  onChange={(e) =>
+                    selectedClipId &&
+                    updateClipProps(selectedClipId, { fadeIn: Number(e.target.value) })
+                  }
+                  className="w-full accent-[#34D399] h-1 bg-[#262936] rounded cursor-pointer"
+                />
+              </div>
+
+              {/* Fade Out */}
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-[#9396A5]">Fade Out</span>
+                  <span className="font-mono text-[#34D399]">{fadeOut.toFixed(1)}s</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="0.1"
+                  value={fadeOut}
+                  onChange={(e) =>
+                    selectedClipId &&
+                    updateClipProps(selectedClipId, { fadeOut: Number(e.target.value) })
+                  }
+                  className="w-full accent-[#34D399] h-1 bg-[#262936] rounded cursor-pointer"
+                />
+              </div>
+
+              {/* Volume */}
+              {trackType !== "text" && (
+                <div className="space-y-1 pt-1">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-[#9396A5]">Clip Volume</span>
+                    <span className="font-mono text-[#E05A2B]">{Math.round(volume * 100)}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="2"
+                    step="0.05"
+                    value={volume}
+                    onChange={(e) =>
+                      selectedClipId &&
+                      updateClipProps(selectedClipId, { volume: Number(e.target.value) })
+                    }
+                    className="w-full accent-[#E05A2B] h-1 bg-[#262936] rounded cursor-pointer"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Effects Stack Section (Must-Have 5) */}
             <div className="space-y-3 bg-[#1A1C24] p-3 rounded-[10px] border border-[#262936]">
               <div className="flex items-center justify-between">
                 <span className="text-[12px] font-semibold text-[#F4EFEA] flex items-center gap-1.5">
@@ -215,12 +291,24 @@ export function Inspector() {
                 selectedClip.effects.map((effect) => (
                   <div
                     key={effect.id}
-                    className="p-2.5 rounded-[6px] bg-[#121318] border border-[#262936] space-y-1"
+                    className="p-2.5 rounded-[6px] bg-[#121318] border border-[#262936] space-y-2"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-[#F4EFEA]">
-                        {effect.effectId}
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-[#E05A2B]" />
+                        <span className="text-[11px] font-semibold text-[#F4EFEA]">
+                          {effect.effectId}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() =>
+                          selectedClipId && removeEffectFromClip(selectedClipId, effect.id)
+                        }
+                        title="Remove effect"
+                        className="text-[#9396A5] hover:text-[#F87171] transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[15px]">close</span>
+                      </button>
                     </div>
                   </div>
                 ))

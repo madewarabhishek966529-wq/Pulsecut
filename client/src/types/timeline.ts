@@ -35,6 +35,9 @@ export const ClipSchema = z.object({
   end: z.number().positive(),
   sourceIn: z.number().nonnegative().default(0),
   text: z.string().optional(),
+  fadeIn: z.number().nonnegative().default(0),
+  fadeOut: z.number().nonnegative().default(0),
+  volume: z.number().min(0).max(2).default(1),
   transform: TransformSchema.default({}),
   effects: z.array(EffectInstanceSchema).default([]),
 });
