@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
 
 interface TopBarProps {
   onOpenExport: () => void;
@@ -10,6 +11,13 @@ interface TopBarProps {
 export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView }: TopBarProps) {
   const [projectTitle, setProjectTitle] = useState("Cyber_Beat_Drop_v2");
   const [aspectRatio, setAspectRatio] = useState("9:16");
+  const [apiStatus, setApiStatus] = useState<"checking" | "online" | "offline">("checking");
+
+  useEffect(() => {
+    api<{ ok: boolean }>("/health")
+      .then(() => setApiStatus("online"))
+      .catch(() => setApiStatus("offline"));
+  }, []);
 
   return (
     <header className="h-12 w-full bg-[#121318]/90 backdrop-blur-xl border-b border-[#262936] px-4 flex items-center justify-between shrink-0 select-none z-30">
@@ -118,6 +126,20 @@ export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView 
 
       {/* Right: Actions */}
       <div className="flex items-center gap-3">
+        {/* Health status badge */}
+        <div className="hidden md:flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#1A1C24] text-[10px] font-mono border border-[#262936]">
+          <span
+            className={`w-1.5 h-1.5 rounded-full ${
+              apiStatus === "online"
+                ? "bg-[#34D399]"
+                : apiStatus === "checking"
+                ? "bg-[#D97706] animate-pulse"
+                : "bg-[#9396A5]"
+            }`}
+          />
+          <span className="text-[#9396A5]">API: {apiStatus}</span>
+        </div>
+
         <button
           onClick={onOpenAiFilter}
           className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-[6px] bg-[#1A1C24] hover:bg-[#262936] border border-[#262936] text-[12px] text-[#E05A2B] hover:shadow-[0_0_12px_rgba(224,90,43,0.3)] transition-all"

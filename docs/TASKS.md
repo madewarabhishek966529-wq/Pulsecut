@@ -11,7 +11,7 @@ Do one at a time. Tick when it works in the browser.
 - [x] Theme tokens defined in `client/src/index.css`
 
 ## Phase 2: Core editor
-- [ ] T1: Upload a video, show it on a PixiJS canvas, play/pause  (prompt: `docs/phase2/T1-canvas-playback.md`)
+- [x] T1: Upload a video, show it on a PixiJS canvas, play/pause  (prompt: `docs/phase2/T1-canvas-playback.md`)
 - [ ] T2: Timeline types + Zustand store + undo/redo  (prompt: `docs/phase2/T2-timeline-store.md`)
 - [ ] T3: Timeline UI: render tracks and clips, zoom, playhead scrub  (prompt: `docs/phase2/T3-timeline-ui.md`)
 - [ ] T4: Clip operations: drag, trim, split, delete, snap  (prompt: `docs/phase2/T4-clip-operations.md`)

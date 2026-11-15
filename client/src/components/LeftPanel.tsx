@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MediaPanel } from "./editor/MediaPanel";
 
 interface LeftPanelProps {
   onOpenAiFilter: () => void;
@@ -47,7 +48,7 @@ const mockEffects = [
 ];
 
 export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
-  const [activeTab, setActiveTab] = useState<"media" | "effects" | "text" | "audio">("effects");
+  const [activeTab, setActiveTab] = useState<"media" | "effects" | "text" | "audio">("media");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -179,43 +180,7 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
       )}
 
       {/* Media Tab Content */}
-      {activeTab === "media" && (
-        <div className="flex-1 flex flex-col p-3 space-y-3 overflow-y-auto">
-          {/* Upload Drop Zone */}
-          <div className="p-4 rounded-[10px] bg-[#1A1C24] border border-dashed border-[#262936] hover:border-[#E05A2B] flex flex-col items-center justify-center text-center cursor-pointer transition-colors group">
-            <span className="material-symbols-outlined text-[24px] text-[#E05A2B] mb-1 group-hover:scale-110 transition-transform">
-              cloud_upload
-            </span>
-            <span className="text-[12px] font-semibold text-[#F4EFEA]">Upload Video or Audio</span>
-            <span className="text-[10px] text-[#9396A5] mt-0.5">MP4, MOV, WAV, MP3</span>
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-[11px] font-medium text-[#9396A5]">Project Assets</span>
-            <div className="space-y-1.5">
-              {[
-                { name: "Cyber_City_4K.mov", time: "00:14", size: "1.4 GB" },
-                { name: "Synth_Car_Chase.mp4", time: "01:02", size: "3.2 GB" },
-                { name: "Hyperpop_Bass_Drop.wav", time: "02:44", size: "48 kHz" },
-              ].map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between p-2 rounded-[6px] bg-[#1A1C24] border border-[#262936] hover:border-[#E05A2B]/50 cursor-grab active:cursor-grabbing transition-colors"
-                >
-                  <div className="flex items-center gap-2 truncate">
-                    <span className="material-symbols-outlined text-[16px] text-[#E05A2B]">movie</span>
-                    <div className="truncate">
-                      <p className="text-[11px] text-[#F4EFEA] font-medium truncate">{item.name}</p>
-                      <span className="text-[9px] text-[#9396A5] font-mono">{item.size}</span>
-                    </div>
-                  </div>
-                  <span className="font-mono text-[10px] text-[#9396A5]">{item.time}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      {activeTab === "media" && <MediaPanel />}
 
       {/* Text Tab Content */}
       {activeTab === "text" && (
