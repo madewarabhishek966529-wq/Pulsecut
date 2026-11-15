@@ -45,4 +45,4 @@ User action -> Zustand timelineStore (JSON) -> Renderer(timeline, t) -> PixiJS c
 All Gemini calls happen on the server. Shader output is untrusted: schema-validated on the server, compiled in a hidden WebGL context on the client, retry cap of 3.
 
 ## Deployment
-Client on Vercel, API on Render or Railway, MongoDB Atlas, media on Cloudinary or S3.
+Client on Vercel, API on Render or Railway, MongoDB Atlas, media on S3 or Object Storage.

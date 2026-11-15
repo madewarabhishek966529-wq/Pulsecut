@@ -26,19 +26,19 @@ Do one at a time. Tick when it works in the browser.
 - [ ] T11: Keyframes for effect params
 
 ## Phase 4: Hero features
-- [ ] T12: Prompt-to-Filter: server route + Gemini + Zod validation
-- [ ] T13: Client shader validator + auto-fix loop + save to library
-- [ ] T14: Audio analysis (Web Audio FFT) -> uBass/uMid/uHigh/uBeat
-- [ ] T15: Parameter bindings UI (bind param to bass/beat)
-- [ ] T16: Edit-by-Chat: JSON patch pipeline + ChatPanel
-- [ ] T17: Auto-captions
+- [ ] T12: Prompt-to-Filter: server route + Gemini + Zod validation  (prompt: `docs/phase4/T12-prompt-to-filter.md`)
+- [ ] T13: Client shader validator + auto-fix loop + save to library  (prompt: `docs/phase4/T13-shader-validator.md`)
+- [ ] T14: Audio analysis (Web Audio FFT) -> uBass/uMid/uHigh/uBeat  (prompt: `docs/phase4/T14-audio-analysis.md`)
+- [ ] T15: Parameter bindings UI (bind param to bass/beat)  (prompt: `docs/phase4/T15-param-bindings.md`)
+- [ ] T16: Edit-by-Chat: JSON patch pipeline + ChatPanel  (prompt: `docs/phase4/T16-edit-by-chat.md`)
+- [ ] T17: Auto-captions  (prompt: `docs/phase4/T17-auto-captions.md`)
 
 ## Phase 5: Backend and export
-- [ ] T18: Auth (register/login/Google) + protected routes
-- [ ] T19: Projects CRUD + autosave
-- [ ] T20: Asset upload (Cloudinary/S3)
-- [ ] T21: Export MP4 with ffmpeg.wasm
-- [ ] T22: Server render queue (BullMQ)
+- [ ] T18: Auth (register/login/Google) + protected routes  (prompt: `docs/phase5/T18-auth.md`)
+- [ ] T19: Projects CRUD + autosave  (prompt: `docs/phase5/T19-projects-crud.md`)
+- [ ] T20: Asset upload (S3 / Object Storage)  (prompt: `docs/phase5/T20-asset-upload.md`)
+- [ ] T21: Export MP4 with ffmpeg.wasm  (prompt: `docs/phase5/T21-export-mp4.md`)
+- [ ] T22: Server render queue (BullMQ)  (prompt: `docs/phase5/T22-server-render-queue.md`)
 
 ## Phase 6: Polish and launch
 - [ ] T23: Page transitions, skeletons, empty states, error states
