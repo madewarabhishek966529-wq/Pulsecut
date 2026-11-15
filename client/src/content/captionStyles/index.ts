@@ -1,0 +1,67 @@
+import type { CaptionStyle } from "../manifest.ts";
+
+export const BUILTIN_CAPTION_STYLES: CaptionStyle[] = [
+  {
+    id: "cap-hormozi",
+    name: "Hormozi Punch",
+    fontFamily: "Space Grotesk, sans-serif",
+    fontSize: 48,
+    fillColor: "#FACC15", // bright yellow
+    strokeColor: "#000000",
+    strokeThickness: 6,
+    highlightColor: "#22C55E",
+    animation: "bounce",
+  },
+  {
+    id: "cap-clean-modern",
+    name: "Clean Modern",
+    fontFamily: "Inter, sans-serif",
+    fontSize: 32,
+    fillColor: "#FFFFFF",
+    strokeColor: "#000000",
+    strokeThickness: 3,
+    animation: "fade",
+  },
+  {
+    id: "cap-netflix",
+    name: "Netflix Standard",
+    fontFamily: "Helvetica, Arial, sans-serif",
+    fontSize: 28,
+    fillColor: "#F4EFEA",
+    strokeColor: "rgba(0,0,0,0.9)",
+    strokeThickness: 4,
+    animation: "none",
+  },
+  {
+    id: "cap-devanagari",
+    name: "Devanagari Bold",
+    fontFamily: "Tiro Devanagari Hindi, sans-serif",
+    fontSize: 40,
+    fillColor: "#E05A2B", // warm coral
+    strokeColor: "#0B0C10",
+    strokeThickness: 5,
+    highlightColor: "#F59E0B",
+    animation: "pop",
+  },
+  {
+    id: "cap-minimal-bottom",
+    name: "Minimalist Sub",
+    fontFamily: "Inter, sans-serif",
+    fontSize: 24,
+    fillColor: "#E2E8F0",
+    strokeColor: "rgba(0,0,0,0.6)",
+    strokeThickness: 2,
+    animation: "none",
+  },
+  {
+    id: "cap-pill-highlight",
+    name: "Pill Box Highlight",
+    fontFamily: "Space Grotesk, sans-serif",
+    fontSize: 34,
+    fillColor: "#0B0C10",
+    strokeColor: "transparent",
+    strokeThickness: 0,
+    highlightColor: "#E05A2B",
+    animation: "pop",
+  },
+];

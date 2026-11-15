@@ -1,0 +1,88 @@
+import type { Sticker } from "../manifest.ts";
+
+export const BUILTIN_STICKERS: Sticker[] = [
+  {
+    id: "stk-arrow-pointer",
+    name: "Directional Arrow",
+    category: "pointers",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M12 2L15 8H9L12 2ZM11 8V22H13V8H11Z" fill="#E05A2B"/>`,
+  },
+  {
+    id: "stk-circle-target",
+    name: "Focus Reticle",
+    category: "shapes",
+    viewBox: "0 0 24 24",
+    svg: `<circle cx="12" cy="12" r="9" stroke="#E05A2B" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" fill="#E05A2B"/>`,
+  },
+  {
+    id: "stk-fire-badge",
+    name: "Fire Flame",
+    category: "badges",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M12 2C10 6 7 8 7 13C7 16.5 9.5 19 12 19C14.5 19 17 16.5 17 13C17 10 15 7 12 2Z" fill="#F97316"/>`,
+  },
+  {
+    id: "stk-verified-check",
+    name: "Verified Check",
+    category: "badges",
+    viewBox: "0 0 24 24",
+    svg: `<circle cx="12" cy="12" r="10" fill="#34D399"/><path d="M7 12L10 15L17 8" stroke="#0B0C10" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  },
+  {
+    id: "stk-star-badge",
+    name: "Golden Star",
+    category: "badges",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M12 2L14.8 8.5L22 9.2L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.2L9.2 8.5L12 2Z" fill="#FACC15"/>`,
+  },
+  {
+    id: "stk-sparkle",
+    name: "AI Sparkle",
+    category: "symbols",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#E05A2B"/>`,
+  },
+  {
+    id: "stk-heart",
+    name: "Red Heart",
+    category: "reactions",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" fill="#EF4444"/>`,
+  },
+  {
+    id: "stk-warning-tag",
+    name: "Warning Alert",
+    category: "symbols",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M1 21H23L12 2L1 21ZM13 18H11V16H13V18ZM13 14H11V10H13V14Z" fill="#F59E0B"/>`,
+  },
+  {
+    id: "stk-corner-frame",
+    name: "Viewport Corner",
+    category: "frames",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M4 10V4H10M14 4H20V10M20 14V20H14M10 20H4V14" stroke="#F4EFEA" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+  },
+  {
+    id: "stk-double-arrow",
+    name: "Fast Forward",
+    category: "pointers",
+    viewBox: "0 0 24 24",
+    svg: `<path d="M4 18L12 12L4 6V18ZM13 18L21 12L13 6V18Z" fill="#34D399"/>`,
+  },
+  {
+    id: "stk-soundwave",
+    name: "Sound Wave Bars",
+    category: "audio",
+    viewBox: "0 0 24 24",
+    svg: `<rect x="2" y="9" width="3" height="6" fill="#E05A2B"/><rect x="8" y="5" width="3" height="14" fill="#E05A2B"/><rect x="14" y="2" width="3" height="20" fill="#E05A2B"/><rect x="20" y="7" width="3" height="10" fill="#E05A2B"/>`,
+  },
+  {
+    id: "stk-rec-badge",
+    name: "REC Live Badge",
+    category: "camera",
+    viewBox: "0 0 24 24",
+    svg: `<circle cx="6" cy="12" r="4" fill="#EF4444"/><rect x="12" y="9" width="9" height="6" rx="1" fill="#F4EFEA"/>`,
+  },
+];

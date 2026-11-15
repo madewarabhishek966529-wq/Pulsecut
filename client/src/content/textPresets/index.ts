@@ -1,0 +1,105 @@
+import type { TextPreset } from "../manifest.ts";
+
+export const BUILTIN_TEXT_PRESETS: TextPreset[] = [
+  {
+    id: "txt-title-punch",
+    name: "Title Punch",
+    category: "titles",
+    style: {
+      fontSize: 64,
+      color: "#F4EFEA",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "800",
+      textTransform: "uppercase",
+      shadow: "0 0 20px rgba(224,90,43,0.5)",
+    },
+  },
+  {
+    id: "txt-lower-third",
+    name: "Lower Third Slate",
+    category: "lower-thirds",
+    style: {
+      fontSize: 24,
+      color: "#F4EFEA",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "600",
+      backgroundColor: "rgba(18,19,24,0.85)",
+      border: "1px solid rgba(224,90,43,0.6)",
+      padding: "8px 16px",
+    },
+  },
+  {
+    id: "txt-neon-headline",
+    name: "Neon Amber Glow",
+    category: "neon",
+    style: {
+      fontSize: 52,
+      color: "#E05A2B",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "700",
+      shadow: "0 0 30px #E05A2B",
+    },
+  },
+  {
+    id: "txt-minimal-caption",
+    name: "Minimal Caption",
+    category: "captions",
+    style: {
+      fontSize: 28,
+      color: "#F4EFEA",
+      fontFamily: "Inter, sans-serif",
+      fontWeight: "500",
+      shadow: "0 2px 4px rgba(0,0,0,0.8)",
+    },
+  },
+  {
+    id: "txt-typo-sub",
+    name: "Typographic Subtitle",
+    category: "subtitles",
+    style: {
+      fontSize: 22,
+      color: "#D97706",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "600",
+      textTransform: "uppercase",
+    },
+  },
+  {
+    id: "txt-kinetic-word",
+    name: "Kinetic Word Pop",
+    category: "kinetic",
+    style: {
+      fontSize: 72,
+      color: "#F59E0B",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "900",
+      shadow: "0 4px 0 #0B0C10",
+    },
+  },
+  {
+    id: "txt-bold-ticker",
+    name: "Bold News Ticker",
+    category: "tickers",
+    style: {
+      fontSize: 20,
+      color: "#0B0C10",
+      fontFamily: "Space Grotesk, sans-serif",
+      fontWeight: "700",
+      backgroundColor: "#E05A2B",
+      padding: "6px 12px",
+    },
+  },
+  {
+    id: "txt-timestamp",
+    name: "Rec Timecode Stamp",
+    category: "timestamp",
+    style: {
+      fontSize: 18,
+      color: "#34D399",
+      fontFamily: "monospace",
+      fontWeight: "600",
+      backgroundColor: "rgba(0,0,0,0.7)",
+      padding: "4px 8px",
+    },
+  },
+];
