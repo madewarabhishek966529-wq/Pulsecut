@@ -1,49 +1,73 @@
 import { useState } from "react";
 import { MediaPanel } from "./editor/MediaPanel";
+import { useTimelineStore } from "@/store/timelineStore";
+import { newId } from "@/lib/id";
+import type { EffectInstance } from "@/types/timeline";
 
 interface LeftPanelProps {
   onOpenAiFilter: () => void;
   onSelectEffect?: (name: string) => void;
 }
 
-const effectCategories = ["All", "Glitch", "Retro", "Glow", "Transitions", "AI"];
+const effectCategories = ["All", "Glitch", "Retro", "Glow", "Transitions"];
 
-const mockEffects = [
+interface BuiltInEffect {
+  name: string;
+  tag: string;
+  icon: string;
+  color: string;
+  beatSync: boolean;
+  defaultUniforms: Record<string, number>;
+}
+
+const builtInEffects: BuiltInEffect[] = [
   {
     name: "RGB Glitch Split",
     tag: "Glitch",
-    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=300&auto=format&fit=crop&q=80",
+    icon: "auto_fix_high",
+    color: "#E05A2B",
     beatSync: true,
+    defaultUniforms: { uIntensity: 0.8 },
   },
   {
     name: "VHS Tape 1994",
     tag: "Retro",
-    image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=300&auto=format&fit=crop&q=80",
+    icon: "videocam",
+    color: "#D97706",
     beatSync: false,
+    defaultUniforms: { uIntensity: 0.6, uGrain: 0.4 },
   },
   {
     name: "Warm Precision Glow",
     tag: "Glow",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&auto=format&fit=crop&q=80",
+    icon: "flare",
+    color: "#F59E0B",
     beatSync: true,
+    defaultUniforms: { uWarmth: 0.75, uBloom: 0.5 },
   },
   {
     name: "Bass Zoom Shock",
     tag: "Transitions",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&auto=format&fit=crop&q=80",
+    icon: "filter_drama",
+    color: "#34D399",
     beatSync: true,
+    defaultUniforms: { uShock: 1.0 },
   },
   {
     name: "Dreamy Film Burn",
     tag: "Retro",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&auto=format&fit=crop&q=80",
+    icon: "whatshot",
+    color: "#EF4444",
     beatSync: false,
+    defaultUniforms: { uBurn: 0.5 },
   },
   {
     name: "Amber Flare",
     tag: "Glow",
-    image: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=300&auto=format&fit=crop&q=80",
+    icon: "lightbulb",
+    color: "#F97316",
     beatSync: false,
+    defaultUniforms: { uFlare: 0.8 },
   },
 ];
 
@@ -52,11 +76,48 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredEffects = mockEffects.filter((effect) => {
+  const timeline = useTimelineStore((s) => s.timeline);
+  const selectedClipId = useTimelineStore((s) => s.selectedClipId);
+  const setTimeline = useTimelineStore((s) => s.setTimeline);
+
+  const filteredEffects = builtInEffects.filter((effect) => {
     const matchesCategory = selectedCategory === "All" || effect.tag === selectedCategory;
     const matchesSearch = effect.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const handleApplyEffect = (effect: BuiltInEffect) => {
+    if (onSelectEffect) onSelectEffect(effect.name);
+
+    let targetId = selectedClipId;
+    if (!targetId) {
+      const firstClip = timeline.tracks.find((t) => t.type === "video")?.clips[0];
+      if (!firstClip) return;
+      targetId = firstClip.id;
+    }
+
+    const newEffect: EffectInstance = {
+      id: newId("fx"),
+      effectId: effect.name,
+      params: effect.defaultUniforms,
+      bindings: effect.beatSync
+        ? [{ param: "uIntensity", source: "bass", gain: 1.2 }]
+        : [],
+      keyframes: [],
+    };
+
+    const newTracks = timeline.tracks.map((t) => ({
+      ...t,
+      clips: t.clips.map((c) =>
+        c.id === targetId ? { ...c, effects: [...c.effects, newEffect] } : c
+      ),
+    }));
+
+    setTimeline({
+      ...timeline,
+      tracks: newTracks,
+    });
+  };
 
   return (
     <aside className="w-80 h-full bg-[#121318] border-r border-[#262936] flex flex-col shrink-0 select-none z-20">
@@ -89,7 +150,7 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
       {/* Effects Tab Content */}
       {activeTab === "effects" && (
         <div className="flex-1 flex flex-col min-h-0 p-3 space-y-3 overflow-y-auto">
-          {/* Highlighted AI Generate Card with Warm Precision Gradient */}
+          {/* AI Generate Action Card */}
           <div
             onClick={onOpenAiFilter}
             className="p-3 rounded-[10px] bg-gradient-to-br from-[#1A1C24] to-[#261c18] border border-[#E05A2B]/40 hover:border-[#E05A2B] cursor-pointer group shadow-[0_0_15px_rgba(224,90,43,0.15)] hover:shadow-[0_0_20px_rgba(224,90,43,0.3)] transition-all"
@@ -104,11 +165,11 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
                 </span>
               </div>
               <span className="px-1.5 py-0.5 rounded bg-[#E05A2B]/20 text-[#E05A2B] font-mono text-[9px] uppercase font-semibold">
-                New
+                Gemini
               </span>
             </div>
             <p className="text-[11px] text-[#9396A5] leading-relaxed">
-              Describe any filter in plain English. Get an instant, custom GLSL GPU shader.
+              Synthesize a custom GLSL GPU fragment shader using natural language.
             </p>
           </div>
 
@@ -121,7 +182,7 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search shader filters..."
+              placeholder="Search effects..."
               className="w-full bg-[#1A1C24] border border-[#262936] rounded-[6px] pl-8 pr-3 py-1.5 text-[12px] text-[#F4EFEA] placeholder-[#9396A5]/50 focus:outline-none focus:border-[#E05A2B] transition-colors"
             />
           </div>
@@ -143,35 +204,36 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
             ))}
           </div>
 
-          {/* 2-Column Effect Cards Grid */}
+          {/* Effect Cards Grid */}
           <div className="grid grid-cols-2 gap-2.5 pt-1">
             {filteredEffects.map((effect) => (
               <div
                 key={effect.name}
-                onClick={() => onSelectEffect && onSelectEffect(effect.name)}
-                className="group relative rounded-[10px] overflow-hidden bg-[#1A1C24] border border-[#262936] hover:border-[#E05A2B] cursor-pointer transition-all hover:shadow-[0_0_14px_rgba(224,90,43,0.25)] flex flex-col"
+                onClick={() => handleApplyEffect(effect)}
+                className="group relative rounded-[10px] overflow-hidden bg-[#1A1C24] border border-[#262936] hover:border-[#E05A2B] cursor-pointer transition-all hover:shadow-[0_0_14px_rgba(224,90,43,0.25)] flex flex-col p-2.5 space-y-2"
               >
-                <div className="relative aspect-video w-full overflow-hidden bg-black">
-                  <img
-                    src={effect.image}
-                    alt={effect.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                <div
+                  className="aspect-video w-full rounded-[6px] flex flex-col items-center justify-center relative overflow-hidden"
+                  style={{ backgroundColor: `${effect.color}15`, borderColor: `${effect.color}40`, borderWidth: 1 }}
+                >
+                  <span
+                    className="material-symbols-outlined text-[28px] transition-transform group-hover:scale-110"
+                    style={{ color: effect.color }}
+                  >
+                    {effect.icon}
+                  </span>
                   {effect.beatSync && (
-                    <span className="absolute top-1.5 right-1.5 px-1 py-0.5 rounded bg-[#0B0C10]/80 border border-[#E05A2B]/50 flex items-center gap-0.5 text-[#E05A2B] font-mono text-[9px]">
-                      <span className="material-symbols-outlined text-[10px] animate-pulse">graphic_eq</span>
+                    <span className="absolute top-1.5 right-1.5 px-1 py-0.2 rounded bg-[#0B0C10]/80 border border-[#E05A2B]/50 flex items-center gap-0.5 text-[#E05A2B] font-mono text-[8px]">
+                      <span className="material-symbols-outlined text-[9px] animate-pulse">graphic_eq</span>
                       Beat
                     </span>
                   )}
-                  <span className="absolute bottom-1.5 left-1.5 px-1 py-0.5 rounded bg-black/60 font-mono text-[9px] text-[#9396A5]">
-                    {effect.tag}
-                  </span>
                 </div>
-                <div className="p-2">
+                <div>
                   <h5 className="text-[11px] font-semibold text-[#F4EFEA] truncate group-hover:text-[#E05A2B] transition-colors">
                     {effect.name}
                   </h5>
-                  <span className="text-[10px] text-[#9396A5]">Drag to clip</span>
+                  <span className="text-[10px] text-[#9396A5]">{effect.tag} • Click to add</span>
                 </div>
               </div>
             ))}
@@ -185,15 +247,26 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
       {/* Text Tab Content */}
       {activeTab === "text" && (
         <div className="flex-1 p-3 space-y-3">
-          <span className="text-[12px] font-medium text-[#9396A5]">Preset Titles & Captions</span>
+          <span className="text-[12px] font-medium text-[#9396A5]">Text & Title Presets</span>
           <div className="space-y-2">
-            {["Warm Precision Title", "Subtitles Auto-Beat", "Glitch Overlay Caption"].map((txt) => (
+            {[
+              { title: "Standard Headline", desc: "Clean centered title" },
+              { title: "Lower Third", desc: "Speaker identifier label" },
+              { title: "Neon Cyber Title", desc: "Amber precision title" },
+            ].map((item) => (
               <div
-                key={txt}
-                className="p-3 rounded-[6px] bg-[#1A1C24] border border-[#262936] hover:border-[#E05A2B] cursor-pointer text-[12px] font-semibold text-[#F4EFEA] flex items-center justify-between"
+                key={item.title}
+                className="p-3 rounded-[6px] bg-[#1A1C24] border border-[#262936] hover:border-[#E05A2B] cursor-pointer flex items-center justify-between group transition-colors"
               >
-                <span>{txt}</span>
-                <span className="material-symbols-outlined text-[16px] text-[#9396A5]">add</span>
+                <div>
+                  <p className="text-[12px] font-semibold text-[#F4EFEA] group-hover:text-[#E05A2B]">
+                    {item.title}
+                  </p>
+                  <span className="text-[10px] text-[#9396A5]">{item.desc}</span>
+                </div>
+                <span className="material-symbols-outlined text-[16px] text-[#9396A5] group-hover:text-[#E05A2B]">
+                  add
+                </span>
               </div>
             ))}
           </div>
@@ -203,11 +276,11 @@ export function LeftPanel({ onOpenAiFilter, onSelectEffect }: LeftPanelProps) {
       {/* Audio Tab Content */}
       {activeTab === "audio" && (
         <div className="flex-1 p-3 space-y-3">
-          <span className="text-[12px] font-medium text-[#9396A5]">Soundtracks & Beat Markers</span>
+          <span className="text-[12px] font-medium text-[#9396A5]">Audio & Beat Tracking</span>
           <div className="p-3 rounded-[6px] bg-[#1A1C24] border border-[#262936] flex items-center justify-between">
             <div>
-              <p className="text-[12px] font-semibold text-[#F4EFEA]">128 BPM Warm Precision Drop</p>
-              <span className="text-[10px] text-[#34D399] font-mono">14 Beat markers detected</span>
+              <p className="text-[12px] font-semibold text-[#F4EFEA]">Web Audio API Engine</p>
+              <span className="text-[10px] text-[#34D399] font-mono">Real-time FFT Analyser</span>
             </div>
             <span className="material-symbols-outlined text-[18px] text-[#34D399]">check_circle</span>
           </div>

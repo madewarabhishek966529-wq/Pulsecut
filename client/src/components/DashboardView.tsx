@@ -1,53 +1,38 @@
 import { useState } from "react";
+import { useTimelineStore } from "@/store/timelineStore";
+import { emptyTimeline } from "@/types/timeline";
 
 interface DashboardViewProps {
   onOpenEditor: () => void;
   onOpenPromptFilter: () => void;
 }
 
-const mockProjects = [
-  {
-    id: 1,
-    title: "Cyber_Beat_Drop_v2",
-    updated: "Edited 2h ago",
-    duration: "00:12:00",
-    ratio: "9:16",
-    thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80",
-    effects: ["Glitch", "Bass-Sync"],
-  },
-  {
-    id: 2,
-    title: "Synthwave_Night_Drive",
-    updated: "Edited 5h ago",
-    duration: "00:24:30",
-    ratio: "9:16",
-    thumbnail: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
-    effects: ["Warm Glow", "VHS"],
-  },
-  {
-    id: 3,
-    title: "Tokyo_Hyperlapse_Remix",
-    updated: "Edited yesterday",
-    duration: "00:08:15",
-    ratio: "9:16",
-    thumbnail: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&auto=format&fit=crop&q=80",
-    effects: ["Amber Flare"],
-  },
-  {
-    id: 4,
-    title: "Club_Bass_Drop_Teaser",
-    updated: "Edited 3 days ago",
-    duration: "00:15:00",
-    ratio: "9:16",
-    thumbnail: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80",
-    effects: ["Zoom Shock"],
-  },
-];
-
 export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardViewProps) {
   const [activeNav, setActiveNav] = useState("projects");
   const [search, setSearch] = useState("");
   const [filterPrompt, setFilterPrompt] = useState("");
+
+  const projectTitle = useTimelineStore((s) => s.projectTitle);
+  const timeline = useTimelineStore((s) => s.timeline);
+  const setTimeline = useTimelineStore((s) => s.setTimeline);
+  const setProjectTitle = useTimelineStore((s) => s.setProjectTitle);
+
+  // Derive current in-memory project item
+  const currentProject = {
+    id: "current",
+    title: projectTitle || "Untitled Project",
+    updated: "Active Project",
+    duration: `${Math.max(timeline.project.duration, 0).toFixed(1)}s`,
+    ratio: `${timeline.project.width}:${timeline.project.height}`,
+    clipsCount: timeline.tracks.reduce((acc, t) => acc + t.clips.length, 0),
+    assetsCount: timeline.assets.length,
+  };
+
+  const handleCreateNewProject = () => {
+    setTimeline(emptyTimeline());
+    setProjectTitle("New Project");
+    onOpenEditor();
+  };
 
   return (
     <div className="flex-1 w-full h-full flex bg-[#0B0C10] overflow-hidden select-none">
@@ -63,7 +48,7 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
             <span className="material-symbols-outlined text-[22px] text-[#0B0C10] font-bold">bolt</span>
           </div>
 
-          {/* Navigation Icons matching the Warm Precision pill styling */}
+          {/* Navigation Icons */}
           <nav className="flex flex-col items-center gap-2 w-full px-2">
             {[
               { id: "projects", icon: "folder", label: "Projects" },
@@ -88,13 +73,11 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
           </nav>
         </div>
 
-        {/* User avatar at bottom */}
+        {/* User avatar */}
         <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#E05A2B] to-[#D97706] p-[1.5px] cursor-pointer">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-            alt="User avatar"
-            className="w-full h-full rounded-full object-cover"
-          />
+          <div className="w-full h-full rounded-full bg-[#1A1C24] flex items-center justify-center text-[#E05A2B]">
+            <span className="material-symbols-outlined text-[18px]">person</span>
+          </div>
         </div>
       </aside>
 
@@ -122,16 +105,9 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
               />
             </div>
 
-            {/* Sort Dropdown */}
-            <select className="bg-[#121318] border border-[#262936] rounded-[6px] px-3 py-1.5 text-[13px] text-[#9396A5] focus:outline-none cursor-pointer">
-              <option value="recent">Recently edited</option>
-              <option value="name">Name (A-Z)</option>
-              <option value="size">Duration</option>
-            </select>
-
             {/* New Project Button */}
             <button
-              onClick={onOpenEditor}
+              onClick={handleCreateNewProject}
               className="btn-primary px-5 py-1.5 text-[13px] text-[#0B0C10] font-semibold flex items-center gap-2 shadow-[0_0_16px_rgba(224,90,43,0.4)]"
             >
               <span className="material-symbols-outlined text-[18px] font-bold">add</span>
@@ -140,15 +116,15 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
           </div>
         </div>
 
-        {/* Hero Strip: "Try Prompt-to-Filter" Card */}
+        {/* Hero Strip: Prompt-to-Filter Card */}
         <div className="p-6 rounded-[14px] glass border border-[#E05A2B]/35 bg-gradient-to-r from-[#121318] via-[#241a15] to-[#121318] flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_10px_30px_rgba(224,90,43,0.15)] relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#E05A2B]/15 rounded-full blur-3xl pointer-events-none" />
           <div className="space-y-1.5 max-w-lg z-10">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded bg-[#E05A2B]/20 text-[#E05A2B] font-mono text-[10px] font-semibold uppercase">
-                Hero Feature
+                AI Shader Synthesis
               </span>
-              <h3 className="text-[17px] font-bold text-[#F4EFEA]">Try Prompt-to-Filter AI</h3>
+              <h3 className="text-[17px] font-bold text-[#F4EFEA]">Prompt-to-Filter AI</h3>
             </div>
             <p className="text-[13px] text-[#9396A5] leading-relaxed">
               Generate custom GLSL GPU filters using natural language, auto-bind to the bassline, and export directly.
@@ -160,7 +136,7 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
               type="text"
               value={filterPrompt}
               onChange={(e) => setFilterPrompt(e.target.value)}
-              placeholder="Describe a filter... e.g. melting neon amber VHS"
+              placeholder="Describe a filter... e.g. amber glow with chromatic pulse"
               className="flex-1 bg-[#121318] border border-[#262936] rounded-[8px] px-3.5 py-2 text-[13px] text-[#F4EFEA] placeholder-[#9396A5]/50 focus:outline-none focus:border-[#E05A2B] transition-colors"
             />
             <button
@@ -168,80 +144,68 @@ export function DashboardView({ onOpenEditor, onOpenPromptFilter }: DashboardVie
               className="btn-primary px-4 py-2 text-[13px] font-semibold text-[#0B0C10] whitespace-nowrap flex items-center gap-1.5 shadow-[0_0_14px_rgba(224,90,43,0.35)]"
             >
               <span className="material-symbols-outlined text-[16px] font-bold">sparkles</span>
-              Generate
+              Open AI
             </button>
           </div>
         </div>
 
-        {/* 4-Column Project Cards Grid */}
+        {/* Real Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {mockProjects.map((project) => (
-            <div
-              key={project.id}
-              onClick={onOpenEditor}
-              className="group rounded-[10px] bg-[#121318] border border-[#262936] hover:border-[#E05A2B] overflow-hidden cursor-pointer transition-all hover:shadow-[0_12px_24px_rgba(224,90,43,0.2)] flex flex-col"
-            >
-              {/* 4:5 Aspect Ratio Thumbnail */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-black">
-                <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/70 font-mono text-[10px] text-[#E05A2B]">
-                  {project.duration}
-                </span>
-
-                {/* Hover overlay with action icons */}
-                <div className="absolute inset-0 bg-[#0B0C10]/75 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3 transition-opacity backdrop-blur-xs">
-                  <button
-                    title="Open Project"
-                    className="w-10 h-10 rounded-full bg-[#E05A2B] text-[#0B0C10] flex items-center justify-center font-bold shadow-[0_0_12px_#E05A2B] hover:scale-110 transition-transform"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">play_arrow</span>
-                  </button>
-                  <button
-                    title="Duplicate"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-9 h-9 rounded-full bg-[#1A1C24] border border-[#262936] text-[#F4EFEA] flex items-center justify-center hover:bg-[#262936]"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">content_copy</span>
-                  </button>
-                  <button
-                    title="Delete"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-9 h-9 rounded-full bg-[#1A1C24] border border-[#262936] text-[#F87171] flex items-center justify-center hover:bg-[#F87171]/20"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">delete</span>
-                  </button>
-                </div>
+          {/* Current Workspace Project Card */}
+          <div
+            onClick={onOpenEditor}
+            className="group rounded-[10px] bg-[#121318] border border-[#262936] hover:border-[#E05A2B] overflow-hidden cursor-pointer transition-all hover:shadow-[0_12px_24px_rgba(224,90,43,0.2)] flex flex-col"
+          >
+            {/* Project Preview Tile */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1A1C24] flex flex-col items-center justify-center p-4 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-[#0B0C10] border border-[#262936] flex items-center justify-center group-hover:border-[#E05A2B] group-hover:scale-105 transition-all">
+                <span className="material-symbols-outlined text-[32px] text-[#E05A2B]">video_file</span>
               </div>
+              <span className="mt-3 font-mono text-[11px] text-[#9396A5]">
+                {currentProject.ratio}
+              </span>
+              <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/70 font-mono text-[10px] text-[#E05A2B]">
+                {currentProject.duration}
+              </span>
 
-              {/* Card Footer */}
-              <div className="p-3.5 space-y-1.5">
-                <h4 className="text-[14px] font-semibold text-[#F4EFEA] truncate group-hover:text-[#E05A2B] transition-colors">
-                  {project.title}
-                </h4>
-                <div className="flex items-center justify-between text-[11px] text-[#9396A5]">
-                  <span>{project.updated}</span>
-                  <div className="flex items-center gap-1">
-                    {project.effects.map((ef) => (
-                      <span key={ef} className="px-1 py-0.2 rounded bg-[#1A1C24] text-[#D97706] font-mono text-[9px]">
-                        {ef}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              {/* Hover overlay with action icons */}
+              <div className="absolute inset-0 bg-[#0B0C10]/75 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3 transition-opacity backdrop-blur-xs">
+                <button
+                  title="Open Project"
+                  className="w-10 h-10 rounded-full bg-[#E05A2B] text-[#0B0C10] flex items-center justify-center font-bold shadow-[0_0_12px_#E05A2B] hover:scale-110 transition-transform"
+                >
+                  <span className="material-symbols-outlined text-[20px]">play_arrow</span>
+                </button>
               </div>
             </div>
-          ))}
 
-          {/* Skeleton loading card variant */}
-          <div className="rounded-[10px] bg-[#121318] border border-[#262936] p-3 space-y-3 flex flex-col justify-between">
-            <div className="skeleton aspect-[4/5] w-full rounded-[6px]" />
-            <div className="space-y-1.5">
-              <div className="skeleton h-4 w-3/4 rounded" />
-              <div className="skeleton h-3 w-1/2 rounded" />
+            {/* Card Footer */}
+            <div className="p-3.5 space-y-1.5">
+              <h4 className="text-[14px] font-semibold text-[#F4EFEA] truncate group-hover:text-[#E05A2B] transition-colors">
+                {currentProject.title}
+              </h4>
+              <div className="flex items-center justify-between text-[11px] text-[#9396A5]">
+                <span>{currentProject.updated}</span>
+                <span className="px-1.5 py-0.5 rounded bg-[#1A1C24] text-[#D97706] font-mono text-[10px]">
+                  {currentProject.clipsCount} clips
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* New Project Action Card */}
+          <div
+            onClick={handleCreateNewProject}
+            className="rounded-[10px] bg-[#121318]/50 border border-dashed border-[#262936] hover:border-[#E05A2B] p-6 space-y-3 flex flex-col items-center justify-center cursor-pointer transition-colors text-center group"
+          >
+            <div className="w-12 h-12 rounded-full bg-[#1A1C24] group-hover:bg-[#E05A2B]/15 text-[#9396A5] group-hover:text-[#E05A2B] flex items-center justify-center transition-colors">
+              <span className="material-symbols-outlined text-[24px]">add</span>
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-[#F4EFEA] group-hover:text-[#E05A2B] transition-colors">
+                Create Project
+              </p>
+              <p className="text-[11px] text-[#9396A5]">Start a fresh timeline</p>
             </div>
           </div>
         </div>

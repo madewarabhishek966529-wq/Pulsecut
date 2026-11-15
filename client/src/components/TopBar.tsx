@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import { useTimelineStore } from "@/store/timelineStore";
 
 interface TopBarProps {
   onOpenExport: () => void;
@@ -9,15 +10,68 @@ interface TopBarProps {
 }
 
 export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView }: TopBarProps) {
-  const [projectTitle, setProjectTitle] = useState("Cyber_Beat_Drop_v2");
-  const [aspectRatio, setAspectRatio] = useState("9:16");
+  const projectTitle = useTimelineStore((s) => s.projectTitle);
+  const setProjectTitle = useTimelineStore((s) => s.setProjectTitle);
+  const setProjectAspect = useTimelineStore((s) => s.setProjectAspect);
+  const undo = useTimelineStore((s) => s.undo);
+  const redo = useTimelineStore((s) => s.redo);
+  const canUndo = useTimelineStore((s) => s.canUndo());
+  const canRedo = useTimelineStore((s) => s.canRedo());
+
+  const project = useTimelineStore((s) => s.timeline.project);
   const [apiStatus, setApiStatus] = useState<"checking" | "online" | "offline">("checking");
+
+  // Determine aspect ratio key from current width and height
+  const getAspectKey = () => {
+    if (project.width === 1080 && project.height === 1920) return "9:16";
+    if (project.width === 1920 && project.height === 1080) return "16:9";
+    if (project.width === 1080 && project.height === 1080) return "1:1";
+    if (project.width === 1080 && project.height === 1350) return "4:5";
+    return `${project.width}:${project.height}`;
+  };
+
+  const handleAspectChange = (val: string) => {
+    switch (val) {
+      case "9:16":
+        setProjectAspect(1080, 1920);
+        break;
+      case "16:9":
+        setProjectAspect(1920, 1080);
+        break;
+      case "1:1":
+        setProjectAspect(1080, 1080);
+        break;
+      case "4:5":
+        setProjectAspect(1080, 1350);
+        break;
+    }
+  };
 
   useEffect(() => {
     api<{ ok: boolean }>("/health")
       .then(() => setApiStatus("online"))
       .catch(() => setApiStatus("offline"));
   }, []);
+
+  // Global Undo / Redo keyboard shortcuts
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) return;
+      if ((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z")) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          redo();
+        } else {
+          undo();
+        }
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === "y" || e.key === "Y")) {
+        e.preventDefault();
+        redo();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [undo, redo]);
 
   return (
     <header className="h-12 w-full bg-[#121318]/90 backdrop-blur-xl border-b border-[#262936] px-4 flex items-center justify-between shrink-0 select-none z-30">
@@ -85,7 +139,7 @@ export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView 
             {/* Sync chip */}
             <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#1A1C24] text-[#9396A5] font-mono text-[11px]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
-              <span>Saved</span>
+              <span>Ready</span>
             </div>
           </div>
         )}
@@ -96,14 +150,26 @@ export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-0.5 text-[#9396A5]">
             <button
+              onClick={undo}
+              disabled={!canUndo}
               title="Undo (Ctrl+Z)"
-              className="w-7 h-7 rounded flex items-center justify-center hover:bg-[#1A1C24] hover:text-[#F4EFEA] transition-colors"
+              className={`w-7 h-7 rounded flex items-center justify-center transition-colors ${
+                canUndo
+                  ? "hover:bg-[#1A1C24] hover:text-[#F4EFEA]"
+                  : "opacity-40 cursor-not-allowed"
+              }`}
             >
               <span className="material-symbols-outlined text-[17px]">undo</span>
             </button>
             <button
+              onClick={redo}
+              disabled={!canRedo}
               title="Redo (Ctrl+Y)"
-              className="w-7 h-7 rounded flex items-center justify-center hover:bg-[#1A1C24] hover:text-[#F4EFEA] transition-colors"
+              className={`w-7 h-7 rounded flex items-center justify-center transition-colors ${
+                canRedo
+                  ? "hover:bg-[#1A1C24] hover:text-[#F4EFEA]"
+                  : "opacity-40 cursor-not-allowed"
+              }`}
             >
               <span className="material-symbols-outlined text-[17px]">redo</span>
             </button>
@@ -112,13 +178,14 @@ export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView 
           <div className="flex items-center gap-1 bg-[#1A1C24] px-2 py-1 rounded-[6px] border border-[#262936]">
             <span className="material-symbols-outlined text-[14px] text-[#9396A5]">crop</span>
             <select
-              value={aspectRatio}
-              onChange={(e) => setAspectRatio(e.target.value)}
+              value={getAspectKey()}
+              onChange={(e) => handleAspectChange(e.target.value)}
               className="bg-transparent text-[12px] font-mono text-[#F4EFEA] focus:outline-none cursor-pointer"
             >
               <option value="9:16" className="bg-[#121318]">9:16 (Reel/TikTok)</option>
               <option value="16:9" className="bg-[#121318]">16:9 (Landscape)</option>
               <option value="1:1" className="bg-[#121318]">1:1 (Square)</option>
+              <option value="4:5" className="bg-[#121318]">4:5 (Portrait)</option>
             </select>
           </div>
         </div>
@@ -156,12 +223,14 @@ export function TopBar({ onOpenExport, onOpenAiFilter, activeView, onChangeView 
           <span>Export</span>
         </button>
 
-        <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#E05A2B] to-[#D97706] p-[1.5px] cursor-pointer">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-            alt="User avatar"
-            className="w-full h-full rounded-full object-cover"
-          />
+        {/* User Avatar SVG */}
+        <div
+          title="Account"
+          className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#E05A2B] to-[#D97706] p-[1.5px] cursor-pointer flex items-center justify-center text-[#0B0C10]"
+        >
+          <div className="w-full h-full rounded-full bg-[#1A1C24] flex items-center justify-center text-[#E05A2B]">
+            <span className="material-symbols-outlined text-[16px]">person</span>
+          </div>
         </div>
       </div>
     </header>

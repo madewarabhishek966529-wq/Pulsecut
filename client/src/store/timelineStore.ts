@@ -2,6 +2,12 @@ import { create } from "zustand";
 import { emptyTimeline, type Timeline, type Clip, type Asset } from "@/types/timeline";
 import { newId } from "@/lib/id";
 import { revokeAsset } from "@/lib/mediaImport";
+import {
+  splitClipAtTime,
+  deleteClipById,
+  updateClip,
+  recalcDuration,
+} from "@/lib/timelineOps";
 
 export type UIAsset = Asset & { name?: string; objectUrl?: string };
 
@@ -9,21 +15,114 @@ interface TimelineState {
   timeline: Timeline;
   currentTime: number;
   isPlaying: boolean;
+  selectedClipId: string | null;
+  projectTitle: string;
+
+  // History
+  past: Timeline[];
+  future: Timeline[];
+
+  // Actions
   setTimeline: (t: Timeline) => void;
   setCurrentTime: (t: number) => void;
   setPlaying: (p: boolean) => void;
+  selectClip: (clipId: string | null) => void;
+  setProjectTitle: (title: string) => void;
+  setProjectAspect: (width: number, height: number) => void;
+
+  // Clip Operations
+  splitClip: (clipId: string, time: number) => void;
+  deleteClip: (clipId: string) => void;
+  updateClipTransform: (
+    clipId: string,
+    transformPatch: Partial<Clip["transform"]>
+  ) => void;
+
+  // Asset Operations
   addAsset: (asset: UIAsset) => void;
   removeAsset: (assetId: string) => void;
+
+  // Undo / Redo
+  undo: () => void;
+  redo: () => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
 }
 
-// TODO (T2): add full clip operations and undo/redo history.
-export const useTimelineStore = create<TimelineState>((set) => ({
+const MAX_HISTORY = 50;
+
+export const useTimelineStore = create<TimelineState>((set, get) => ({
   timeline: emptyTimeline(),
   currentTime: 0,
   isPlaying: false,
+  selectedClipId: null,
+  projectTitle: "Untitled Project",
+  past: [],
+  future: [],
+
   setTimeline: (timeline) => set({ timeline }),
   setCurrentTime: (currentTime) => set({ currentTime }),
   setPlaying: (isPlaying) => set({ isPlaying }),
+  selectClip: (selectedClipId) => set({ selectedClipId }),
+  setProjectTitle: (projectTitle) => set({ projectTitle }),
+
+  setProjectAspect: (width, height) =>
+    set((state) => {
+      const nextTimeline: Timeline = {
+        ...state.timeline,
+        project: {
+          ...state.timeline.project,
+          width,
+          height,
+        },
+      };
+      return {
+        timeline: nextTimeline,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
+      };
+    }),
+
+  splitClip: (clipId, time) =>
+    set((state) => {
+      const next = splitClipAtTime(state.timeline, clipId, time);
+      if (next === state.timeline) return state;
+      return {
+        timeline: next,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
+      };
+    }),
+
+  deleteClip: (clipId) =>
+    set((state) => {
+      const next = deleteClipById(state.timeline, clipId);
+      return {
+        timeline: next,
+        selectedClipId: state.selectedClipId === clipId ? null : state.selectedClipId,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
+      };
+    }),
+
+  updateClipTransform: (clipId, transformPatch) =>
+    set((state) => {
+      const target = state.timeline.tracks
+        .flatMap((t) => t.clips)
+        .find((c) => c.id === clipId);
+      if (!target) return state;
+
+      const updatedClip = {
+        ...target,
+        transform: {
+          ...target.transform,
+          ...transformPatch,
+        },
+      };
+
+      const next = updateClip(state.timeline, clipId, updatedClip);
+      return { timeline: next };
+    }),
 
   addAsset: (asset) =>
     set((state) => {
@@ -32,6 +131,7 @@ export const useTimelineStore = create<TimelineState>((set) => ({
 
       let newProject = { ...state.timeline.project };
       let newTracks = [...state.timeline.tracks];
+      let newSelectedClipId = state.selectedClipId;
 
       if (isFirstAsset) {
         const assetDuration = asset.duration || 0;
@@ -42,7 +142,6 @@ export const useTimelineStore = create<TimelineState>((set) => ({
           duration: assetDuration,
         };
 
-        // Auto-create ONE clip on the video track covering the asset (T1 only)
         const videoTrackIndex = newTracks.findIndex((t) => t.type === "video");
         const initialClip: Clip = {
           id: newId("clip"),
@@ -60,6 +159,8 @@ export const useTimelineStore = create<TimelineState>((set) => ({
           effects: [],
         };
 
+        newSelectedClipId = initialClip.id;
+
         if (videoTrackIndex >= 0) {
           newTracks[videoTrackIndex] = {
             ...newTracks[videoTrackIndex],
@@ -76,14 +177,19 @@ export const useTimelineStore = create<TimelineState>((set) => ({
         }
       }
 
+      const nextTimeline: Timeline = {
+        ...state.timeline,
+        project: newProject,
+        assets: newAssets,
+        tracks: newTracks,
+      };
+
       return {
-        timeline: {
-          ...state.timeline,
-          project: newProject,
-          assets: newAssets,
-          tracks: newTracks,
-        },
+        timeline: nextTimeline,
         currentTime: isFirstAsset ? 0 : state.currentTime,
+        selectedClipId: newSelectedClipId,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
       };
     }),
 
@@ -100,20 +206,48 @@ export const useTimelineStore = create<TimelineState>((set) => ({
         clips: track.clips.filter((c) => c.assetId !== assetId),
       }));
 
-      const isNowEmpty = newAssets.length === 0;
-      const newProject = isNowEmpty
-        ? { ...state.timeline.project, duration: 0 }
-        : state.timeline.project;
+      const nextTimeline: Timeline = {
+        ...state.timeline,
+        assets: newAssets,
+        tracks: newTracks,
+        project: {
+          ...state.timeline.project,
+          duration: recalcDuration({ ...state.timeline, tracks: newTracks }),
+        },
+      };
 
       return {
-        timeline: {
-          ...state.timeline,
-          project: newProject,
-          assets: newAssets,
-          tracks: newTracks,
-        },
-        currentTime: isNowEmpty ? 0 : state.currentTime,
-        isPlaying: isNowEmpty ? false : state.isPlaying,
+        timeline: nextTimeline,
+        selectedClipId: null,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: [],
       };
     }),
+
+  undo: () =>
+    set((state) => {
+      if (state.past.length === 0) return state;
+      const previous = state.past[state.past.length - 1];
+      const newPast = state.past.slice(0, -1);
+      return {
+        timeline: previous,
+        past: newPast,
+        future: [state.timeline, ...state.future].slice(0, MAX_HISTORY),
+      };
+    }),
+
+  redo: () =>
+    set((state) => {
+      if (state.future.length === 0) return state;
+      const next = state.future[0];
+      const newFuture = state.future.slice(1);
+      return {
+        timeline: next,
+        past: [...state.past, state.timeline].slice(-MAX_HISTORY),
+        future: newFuture,
+      };
+    }),
+
+  canUndo: () => get().past.length > 0,
+  canRedo: () => get().future.length > 0,
 }));

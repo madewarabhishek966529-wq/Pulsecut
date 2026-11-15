@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "scan:bundle": "node scripts/scan-bundle.js",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },

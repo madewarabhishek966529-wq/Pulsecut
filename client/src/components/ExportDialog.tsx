@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTimelineStore } from "@/store/timelineStore";
 
 interface ExportDialogProps {
   isOpen: boolean;
@@ -8,29 +9,32 @@ interface ExportDialogProps {
 
 export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
   const [resolution, setResolution] = useState("1080p");
-  const [fps, setFps] = useState("60");
+  const [fps, setFps] = useState("30");
   const [quality, setQuality] = useState("Balanced");
-  const [status, setStatus] = useState<"idle" | "rendering" | "done">("idle");
-  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState<"idle" | "exporting" | "error" | "done">("idle");
+  const [statusMsg, setStatusMsg] = useState("");
+
+  const timeline = useTimelineStore((s) => s.timeline);
+  const projectTitle = useTimelineStore((s) => s.projectTitle);
+
+  const duration = timeline.project.duration;
+  const clipsCount = timeline.tracks.reduce((acc, t) => acc + t.clips.length, 0);
+  const hasClips = clipsCount > 0 && duration > 0;
 
   const handleStartExport = () => {
-    setStatus("rendering");
-    setProgress(0);
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setStatus("done");
-          return 100;
-        }
-        return prev + 15;
-      });
-    }, 300);
+    if (!hasClips) return;
+    setStatus("exporting");
+    setStatusMsg("Preparing timeline assets for WebCodecs render pipeline...");
+    // Future WebCodecs / BullMQ render hook here
+    setTimeout(() => {
+      setStatus("done");
+      setStatusMsg("Export preflight completed. In-browser WebCodecs pipeline ready.");
+    }, 1500);
   };
 
   const handleReset = () => {
     setStatus("idle");
-    setProgress(0);
+    setStatusMsg("");
   };
 
   if (!isOpen) return null;
@@ -66,55 +70,50 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
           <div className="p-6 space-y-5">
             {status === "idle" && (
               <>
-                {/* Project Thumbnail & Meta */}
+                {/* Project Metadata Preflight */}
                 <div className="flex items-center gap-4 p-3 rounded-[10px] bg-[#1A1C24] border border-[#262936]">
-                  <div className="relative w-28 aspect-video rounded-[6px] overflow-hidden bg-black shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=300&auto=format&fit=crop&q=80"
-                      alt="Thumbnail"
-                      className="w-full h-full object-cover"
-                    />
-                    <span className="absolute bottom-1 right-1 px-1 rounded bg-black/70 font-mono text-[9px] text-[#E05A2B]">
-                      00:12:00
-                    </span>
+                  <div className="w-16 h-16 rounded-[8px] bg-[#0B0C10] border border-[#262936] flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-[28px] text-[#E05A2B]">video_file</span>
                   </div>
-                  <div className="truncate">
-                    <h4 className="text-[14px] font-semibold text-[#F4EFEA] truncate">Cyber_Beat_Drop_v2.mp4</h4>
-                    <p className="text-[12px] text-[#9396A5]">9:16 Vertical Reel • 3 Tracks</p>
+                  <div className="truncate flex-1">
+                    <h4 className="text-[14px] font-semibold text-[#F4EFEA] truncate">
+                      {projectTitle || "Untitled"}.mp4
+                    </h4>
+                    <p className="text-[12px] text-[#9396A5]">
+                      {timeline.project.width} x {timeline.project.height} • {clipsCount} Clips
+                    </p>
                     <span className="inline-block mt-1 px-1.5 py-0.5 rounded bg-[#E05A2B]/15 text-[#E05A2B] font-mono text-[10px]">
-                      H.264 / AAC
+                      Duration: {duration.toFixed(2)}s
                     </span>
                   </div>
                 </div>
+
+                {!hasClips && (
+                  <div className="p-3 rounded-[8px] bg-[#F87171]/15 border border-[#F87171]/40 text-[#F87171] text-[12px] flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[16px]">warning</span>
+                    <span>Timeline has no clips. Import media and add clips before exporting.</span>
+                  </div>
+                )}
 
                 {/* Settings Grid */}
                 <div className="space-y-4">
                   {/* Resolution */}
                   <div className="space-y-1.5">
-                    <label className="text-[12px] font-medium text-[#9396A5]">Resolution</label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {["720p", "1080p", "4K"].map((res) => {
-                        const is4K = res === "4K";
-                        const isSelected = resolution === res && !is4K;
+                    <label className="text-[12px] font-medium text-[#9396A5]">Export Resolution</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {["720p", "1080p"].map((res) => {
+                        const isSelected = resolution === res;
                         return (
                           <button
                             key={res}
-                            disabled={is4K}
-                            onClick={() => !is4K && setResolution(res)}
+                            onClick={() => setResolution(res)}
                             className={`px-3 py-2 rounded-[6px] text-[13px] font-medium border flex items-center justify-center gap-1.5 transition-all ${
                               isSelected
                                 ? "bg-[#E05A2B]/15 border-[#E05A2B] text-[#E05A2B]"
-                                : is4K
-                                ? "bg-[#1A1C24]/40 border-[#262936] text-[#9396A5]/40 cursor-not-allowed"
                                 : "bg-[#1A1C24] border-[#262936] text-[#F4EFEA] hover:bg-[#262936]"
                             }`}
                           >
                             <span>{res}</span>
-                            {is4K && (
-                              <span className="px-1 py-0.2 rounded bg-[#262936] text-[9px] text-[#9396A5] uppercase font-mono">
-                                Soon
-                              </span>
-                            )}
                           </button>
                         );
                       })}
@@ -162,41 +161,24 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                     </div>
                   </div>
                 </div>
-
-                {/* Estimate info bar */}
-                <div className="flex items-center justify-between p-3 rounded-[6px] bg-[#1A1C24] border border-[#262936] font-mono text-[12px]">
-                  <span className="text-[#9396A5]">Estimated File Size:</span>
-                  <span className="text-[#E05A2B] font-semibold">~42.8 MB (Render time: ~14s)</span>
-                </div>
               </>
             )}
 
-            {/* Progress State */}
-            {status === "rendering" && (
-              <div className="py-8 space-y-5 text-center">
+            {/* Exporting State */}
+            {status === "exporting" && (
+              <div className="py-8 space-y-4 text-center">
                 <div className="w-16 h-16 mx-auto rounded-full bg-[#E05A2B]/10 flex items-center justify-center border border-[#E05A2B]/30 animate-pulse">
                   <span className="material-symbols-outlined text-[32px] text-[#E05A2B]">memory</span>
                 </div>
                 <div>
-                  <h4 className="text-[16px] font-semibold text-[#F4EFEA]">Rendering Frames on GPU</h4>
-                  <p className="text-[12px] text-[#9396A5] font-mono mt-1">
-                    Frame {Math.round((progress / 100) * 360)} of 360 ({progress}%)
-                  </p>
+                  <h4 className="text-[16px] font-semibold text-[#F4EFEA]">Processing Export</h4>
+                  <p className="text-[12px] text-[#9396A5] mt-1">{statusMsg}</p>
                 </div>
-
-                {/* Progress Bar with Warm Coral-Amber gradient */}
-                <div className="w-full h-2 rounded-full bg-[#1A1C24] overflow-hidden p-0.5 border border-[#262936]">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#E05A2B] to-[#D97706] transition-all duration-300 shadow-[0_0_12px_rgba(224,90,43,0.5)]"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-
                 <button
                   onClick={handleReset}
-                  className="px-4 py-1.5 rounded-[6px] border border-[#262936] hover:bg-[#1A1C24] text-[12px] text-[#9396A5] hover:text-[#F4EFEA]"
+                  className="px-4 py-1.5 rounded-[6px] border border-[#262936] hover:bg-[#1A1C24] text-[12px] text-[#9396A5]"
                 >
-                  Cancel Export
+                  Cancel
                 </button>
               </div>
             )}
@@ -208,18 +190,20 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                   <span className="material-symbols-outlined text-[32px] text-[#34D399]">check</span>
                 </div>
                 <div>
-                  <h4 className="text-[18px] font-bold text-[#F4EFEA]">Export Complete!</h4>
-                  <p className="text-[12px] text-[#9396A5] font-mono mt-1">Cyber_Beat_Drop_v2.mp4 • 43.1 MB</p>
+                  <h4 className="text-[18px] font-bold text-[#F4EFEA]">Export Preflight Complete</h4>
+                  <p className="text-[12px] text-[#9396A5] mt-1">
+                    {projectTitle}.mp4 • {resolution} @ {fps}fps
+                  </p>
                 </div>
-
-                <div className="flex items-center justify-center gap-3 pt-2">
-                  <button className="btn-primary px-6 py-2 text-[13px] text-[#0B0C10] font-semibold flex items-center gap-2 shadow-[0_0_16px_rgba(224,90,43,0.4)]">
-                    <span className="material-symbols-outlined text-[18px]">download</span>
-                    Download Video
-                  </button>
-                  <button className="px-4 py-2 rounded-[6px] border border-[#262936] bg-[#1A1C24] hover:bg-[#262936] text-[13px] text-[#F4EFEA] flex items-center gap-2 transition-colors">
-                    <span className="material-symbols-outlined text-[18px]">link</span>
-                    Copy Link
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      handleReset();
+                      onClose();
+                    }}
+                    className="btn-primary px-6 py-2 text-[13px] text-[#0B0C10] font-semibold shadow-[0_0_16px_rgba(224,90,43,0.4)]"
+                  >
+                    Done
                   </button>
                 </div>
               </div>
@@ -236,8 +220,9 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                 Cancel
               </button>
               <button
+                disabled={!hasClips}
                 onClick={handleStartExport}
-                className="btn-primary px-6 py-1.5 text-[13px] text-[#0B0C10] font-semibold shadow-[0_0_16px_rgba(224,90,43,0.4)] flex items-center gap-1.5"
+                className="btn-primary px-6 py-1.5 text-[13px] text-[#0B0C10] font-semibold shadow-[0_0_16px_rgba(224,90,43,0.4)] flex items-center gap-1.5 disabled:opacity-40"
               >
                 <span className="material-symbols-outlined text-[16px]">bolt</span>
                 Export Video
